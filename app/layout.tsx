@@ -41,33 +41,33 @@ export const metadata: Metadata = {
   },
   description: siteConfig.description,
   keywords: [
-    'Next.js',
-    'React',
-    'Tailwind CSS',
-    'Server Components',
-    'Radix UI'
+    'spiritual live class',
+    'tech live classes',
+    'wizard of hahz',
+    'Hahz Terry',
+    'Crypto live class'
   ],
   authors: [
     {
-      name: 'antoineross',
-      url: 'https://antoineross.com'
+      name: 'wizard of hahz',
+      url: 'https://hahz.live'
     }
   ],
-  creator: 'antoineross',
+  creator: 'wizrd of hahz',
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: siteConfig.url,
-    title: siteConfig.name,
-    description: siteConfig.description,
-    siteName: siteConfig.name
+    url: hahz.live,
+    title: hahz.live,
+    description: 'Your Front Row Seat to Motivation, Tech, & Spiritual — Live by the Wizard of Hahz',
+    siteName: hahz.live
   },
   twitter: {
     card: 'summary_large_image',
-    title: siteConfig.name,
-    description: siteConfig.description,
+    title: hahz.live,
+    description: Your Front Row Seat to Motivation, Tech, & Spiritual — Live by the Wizard of Hahz,
     images: [`${siteConfig.url}/og.jpg`],
-    creator: '@antoineross'
+    creator: '@wizardofhahz'
   },
   icons: {
     icon: '/favicon.ico',
