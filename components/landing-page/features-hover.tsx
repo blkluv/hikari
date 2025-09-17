@@ -38,7 +38,7 @@ export default function FeaturesHover() {
                 <svg
                   viewBox="0 0 24 24"
                   className="w-12 h-12 mb-4 fill-current"
-                  fillRule={feature.fillRule || 'evenodd'}
+                  fillRule="evenodd" {/* Remove dynamic fillRule */}
                 >
                   <path d={feature.svgPath || ''} />
                 </svg>
@@ -54,7 +54,7 @@ export default function FeaturesHover() {
                 <svg
                   viewBox="0 0 24 24"
                   className="w-12 h-12 mb-4 fill-current"
-                  fillRule={feature.fillRule || 'evenodd'}
+                  fillRule="evenodd" {/* Remove dynamic fillRule */}
                 >
                   <path d={feature.svgPath || ''} />
                 </svg>
