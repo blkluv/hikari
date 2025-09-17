@@ -24,7 +24,7 @@ export default async function IndexPage() {
               </Link>
             </div>
           </div>
-          <Link href="https://x.com/wizardofhahz/status/1812493114948600317" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center w-full mx-auto">
+          <Link href="https://x.com/luvnft/status/1968455677933768779" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center w-full mx-auto">
             <Image src="/images/tweet.png" alt="Tweet by shadcn" width={550} height={300} />
           </Link>
         </section>
