@@ -8,5 +8,6 @@ export const siteConfig: SiteConfig = {
   ogImage: 'https://hahz.live/og.jpg',
   links: {
     twitter: 'https://twitter.com/wizardofhahz',
+    github: 'https://github.com/blkluv' // A
   }
 };
