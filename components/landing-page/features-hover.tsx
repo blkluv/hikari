@@ -35,13 +35,12 @@ export default function FeaturesHover() {
                 href={feature.link}
                 className="block"
               >
-                <svg
-                  viewBox="0 0 24 24"
-                  className="w-12 h-12 mb-4 fill-current"
-                  fillRule="evenodd" {/* Remove dynamic fillRule */}
-                >
-                  <path d={feature.svgPath || ''} />
-                </svg>
+                {/* Use img tag for emoji URLs instead of SVG */}
+                <img 
+                  src={feature.emoji} 
+                  alt={feature.title}
+                  className="w-12 h-12 mb-4"
+                />
                 <div className="mb-2 text-lg font-medium text-gray-900 dark:text-gray-100">
                   {feature.title}
                 </div>
@@ -51,13 +50,12 @@ export default function FeaturesHover() {
               </a>
             ) : (
               <div>
-                <svg
-                  viewBox="0 0 24 24"
-                  className="w-12 h-12 mb-4 fill-current"
-                  fillRule="evenodd" {/* Remove dynamic fillRule */}
-                >
-                  <path d={feature.svgPath || ''} />
-                </svg>
+                {/* Use img tag for emoji URLs instead of SVG */}
+                <img 
+                  src={feature.emoji} 
+                  alt={feature.title}
+                  className="w-12 h-12 mb-4"
+                />
                 <div className="mb-2 text-lg font-medium text-gray-900 dark:text-gray-100">
                   {feature.title}
                 </div>
