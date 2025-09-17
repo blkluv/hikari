@@ -57,15 +57,15 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: hahz.live,
-    title: hahz.live,
+    url: 'hahz.live',
+    title: 'hahz.live',
     description: 'Your Front Row Seat to Motivation, Tech, & Spiritual — Live by the Wizard of Hahz',
-    siteName: hahz.live
+    siteName: 'hahz.live'
   },
   twitter: {
     card: 'summary_large_image',
-    title: hahz.live,
-    description: Your Front Row Seat to Motivation, Tech, & Spiritual — Live by the Wizard of Hahz,
+    title: 'hahz.live',
+    description: 'Your Front Row Seat to Motivation, Tech, & Spiritual — Live by the Wizard of Hahz',
     images: [`${siteConfig.url}/og.jpg`],
     creator: '@wizardofhahz'
   },
