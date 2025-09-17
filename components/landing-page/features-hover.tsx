@@ -28,29 +28,49 @@ export default function FeaturesHover() {
             key={feature.title}
             className="relative p-6 overflow-hidden border rounded-lg bg-background dark:bg-zinc-950"
           >
-            <a target="_blank" rel="noopener noreferrer" href={feature.link}>
-              <svg
-                viewBox="0 0 24 24"
-                className="w-12 h-12 mb-4 fill-current"
-                fill-rule={feature.fillRule}
+            {feature.link ? (
+              <a
+                target="_blank"
+                rel="noopener noreferrer"
+                href={feature.link}
+                className="block"
               >
-                <path d={feature.svgPath} />
-              </svg>
-              <div className="mb-2 text-lg font-medium text-gray-900 dark:text-gray-100">
-                {feature.title}
+                <svg
+                  viewBox="0 0 24 24"
+                  className="w-12 h-12 mb-4 fill-current"
+                  fillRule={feature.fillRule || 'evenodd'}
+                >
+                  <path d={feature.svgPath || ''} />
+                </svg>
+                <div className="mb-2 text-lg font-medium text-gray-900 dark:text-gray-100">
+                  {feature.title}
+                </div>
+                <div className="text-sm font-normal text-gray-500 dark:text-gray-500">
+                  {feature.description}
+                </div>
+              </a>
+            ) : (
+              <div>
+                <svg
+                  viewBox="0 0 24 24"
+                  className="w-12 h-12 mb-4 fill-current"
+                  fillRule={feature.fillRule || 'evenodd'}
+                >
+                  <path d={feature.svgPath || ''} />
+                </svg>
+                <div className="mb-2 text-lg font-medium text-gray-900 dark:text-gray-100">
+                  {feature.title}
+                </div>
+                <div className="text-sm font-normal text-gray-500 dark:text-gray-500">
+                  {feature.description}
+                </div>
               </div>
-              <div className="text-sm font-normal text-gray-500 dark:text-gray-500">
-                {feature.description}
-              </div>
-            </a>
+            )}
           </motion.div>
         ))}
       </div>
       <div className="mx-auto text-center md:max-w-[58rem]">
-        {/* <p className="leading-normal text-muted-foreground sm:text-lg sm:leading-7">
-          HAHZ.LIVEalso includes a blog and a full-featured documentation site
-          built using Fumadocs and MDX.
-        </p> */}
+        {/* optional footer text */}
       </div>
     </section>
   );
