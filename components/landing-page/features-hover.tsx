@@ -8,16 +8,16 @@ export default function FeaturesHover() {
   return (
     <section
       id="features"
-      className="container space-y-6 bg-zinc-50 py-8 dark:bg-zinc-900 md:py-12 lg:py-24 rounded-6xl mb-10"
+      className="container py-8 mb-10 space-y-6 bg-zinc-50 dark:bg-zinc-900 md:py-12 lg:py-24 rounded-6xl"
     >
       <div className="mx-auto flex max-w-[58rem] flex-col items-center space-y-4 text-center">
         <h2 className="font-heading text-3xl leading-[1.1] sm:text-3xl md:text-6xl">
-          Features
+          Purpose Over Profit
         </h2>
         <p className="max-w-[85%] leading-normal text-muted-foreground sm:text-lg sm:leading-7">
-          This project is a complete assortment of the best open source projects
-          that can be used for SaaS products. Built with Nextjs14 and Supabase
-          using the app router.
+          Join the spiritual-purpose economy. Manifested by the Web5 creator,
+          this ecosystem gives you tools, insights, and IRL experiences —
+          including the first physical asset tokenized as an NFT (2021).
         </p>
       </div>
       <div className="mx-auto grid w-full gap-6 sm:grid-cols-2 md:grid-cols-3 md:max-w-[64rem]">
@@ -26,12 +26,12 @@ export default function FeaturesHover() {
             whileHover={{ y: -8 }}
             transition={{ type: 'spring', bounce: 0.7 }}
             key={feature.title}
-            className="relative overflow-hidden rounded-lg border bg-background dark:bg-zinc-950 p-6"
+            className="relative p-6 overflow-hidden border rounded-lg bg-background dark:bg-zinc-950"
           >
             <a target="_blank" rel="noopener noreferrer" href={feature.link}>
               <svg
                 viewBox="0 0 24 24"
-                className="h-12 w-12 fill-current mb-4"
+                className="w-12 h-12 mb-4 fill-current"
                 fill-rule={feature.fillRule}
               >
                 <path d={feature.svgPath} />
@@ -48,7 +48,7 @@ export default function FeaturesHover() {
       </div>
       <div className="mx-auto text-center md:max-w-[58rem]">
         {/* <p className="leading-normal text-muted-foreground sm:text-lg sm:leading-7">
-          Hikari also includes a blog and a full-featured documentation site
+          HAHZ.LIVEalso includes a blog and a full-featured documentation site
           built using Fumadocs and MDX.
         </p> */}
       </div>

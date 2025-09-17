@@ -2,7 +2,7 @@ export const footerLinks = {
   getInTouch: {
     title: 'Get in touch',
     description:
-      "We partner with global brands, from startups to industry leaders. Let's discuss.",
+      "HAHZ.LIVE partners with visionaries to global brands, from startups to industry leaders. Let's discuss.",
     subscribeTitle: 'Subscribe to our newsletter'
   },
   pages: {
@@ -27,7 +27,7 @@ export const footerLinks = {
   },
   location: {
     title: 'Location',
-    address: 'Chicago HQ Estica Cop.\nMacomb, MI 48042',
+    address: 'Atlanta Georgia | USA',
     socialLinksTitle: 'Social links:'
   }
 };

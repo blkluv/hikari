@@ -8,50 +8,45 @@ interface Plan {
 
 const pricingPlans: Plan[] = [
   {
-    name: 'Starter',
-    description: 'Kickstart your journey with essential templates and community access.',
+    name: 'Tribe Tier',
+    description: 'Perfect for those starting their journey in the purpose economy.',
     features: [
-      'Access to basic template library',
-      'Monthly community newsletter',
-      "Entry to our 'Template Exchange' forum",
-      'Random template suggestions',
-      'Template of the month'
+      'Daily Huddles (15-min livestream pep talks)',
+      'Access to weekly livestream classes + replays',
+      'Private community chat + mastermind tribe',
+      'Earn tribe memecoins for showing up & participating',
+      'Unlock tokenized rewards for engagement'
     ],
-    monthlyPrice: 900,
-    yearlyPrice: 9000
+    monthlyPrice: 44,
+    yearlyPrice: 440
   },
   {
-    name: 'Pro',
-    description: 'For those who need advanced templates and enhanced community engagement.',
+    name: 'Manifestor Tier',
+    description: 'Best for those ready to level up spiritually & financially with group support.',
     features: [
-      'Access to premium template library',
-      'Weekly community digest',
-      "Priority access to 'Template Exchange' forum",
-      'Personalized template recommendations',
-      'Monthly expert webinar',
-      "Access to exclusive templates with 20% more features!",
-      'Custom template requests'
+      'Everything in Tribe Tier',
+      '2x Weekly Group Spiritual Coaching Sessions (live Q&A + feedback)',
+      'Boosted tribe memecoin rewards (higher earning multipliers)',
+      'Access to resource vault (guides, meditations, crypto insights)',
+      'Monthly NFT/Token drops as proof of participation',
+      'Network in the manifested mastermind of leaders & visionaries'
     ],
-    monthlyPrice: 9900,
-    yearlyPrice: 99000
+    monthlyPrice: 144,
+    yearlyPrice: 1440
   },
   {
-    name: 'Enterprise',
-    description: 'For organizations that require comprehensive templates and dedicated support.',
+    name: 'Ascension Tier',
+    description: 'For serious seekers, creators, and leaders who want direct access.',
     features: [
-      'Unlimited access to all templates',
-      'Daily template updates',
-      "VIP access to 'Template Exchange' forum",
-      'Personalized consulting sessions',
-      'Weekly live Q&A sessions',
-      "Access to the complete template library (unlimited!)",
-      'Templates on demand',
-      "Remove 'Powered by Template Generator'",
-      'Free membership to exclusive community events',
-      'Dedicated support h2otline'
+      'Everything in Manifestor Tier',
+      '1-on-1 Spiritual Coaching (monthly private session with Hahz)',
+      'Priority spotlight coaching during livestreams',
+      'Exclusive VIP Memecoin Airdrops + tokenized recognition',
+      'Access to special IRL meetups / retreats (discounted or free)',
+      'Become part of the core inner circle co-creating the Web5 Purpose Economy'
     ],
-    monthlyPrice: 99900,
-    yearlyPrice: 999000
+    monthlyPrice: 444,
+    yearlyPrice: 4440
   }
 ];
 
@@ -67,33 +62,33 @@ interface ProductWithPrices extends Product {
 
 export const dummyPricing: ProductWithPrices[] = [
   {
-    id: 'dummy-basic',
-    name: 'Basic Plan',
-    description: 'For individuals just getting started',
+    id: 'tribe-tier',
+    name: 'Tribe Tier',
+    description: 'Perfect for those starting their journey in the purpose economy.',
     prices: [
       {
-        id: 'dummy-basic-price-month',
+        id: 'tribe-tier-month',
         currency: 'USD',
-        unit_amount: 999,
+        unit_amount: 4400, // $44
         interval: 'month',
         interval_count: 1,
         trial_period_days: null,
         type: 'recurring',
         active: true,
-        product_id: 'dummy-basic',
+        product_id: 'tribe-tier',
         description: null,
         metadata: null
       },
       {
-        id: 'dummy-basic-price-year',
+        id: 'tribe-tier-year',
         currency: 'USD',
-        unit_amount: 9990,
+        unit_amount: 44000, // $440
         interval: 'year',
         interval_count: 1,
         trial_period_days: null,
         type: 'recurring',
         active: true,
-        product_id: 'dummy-basic',
+        product_id: 'tribe-tier',
         description: null,
         metadata: null
       }
@@ -103,33 +98,33 @@ export const dummyPricing: ProductWithPrices[] = [
     active: null
   },
   {
-    id: 'dummy-pro',
-    name: 'Pro Plan',
-    description: 'For growing businesses',
+    id: 'manifestor-tier',
+    name: 'Manifestor Tier',
+    description: 'Best for those ready to level up spiritually & financially with group support.',
     prices: [
       {
-        id: 'dummy-pro-price-month',
+        id: 'manifestor-tier-month',
         currency: 'USD',
-        unit_amount: 2999,
+        unit_amount: 14400, // $144
         interval: 'month',
         interval_count: 1,
         trial_period_days: null,
         type: 'recurring',
         active: true,
-        product_id: 'dummy-pro',
+        product_id: 'manifestor-tier',
         description: null,
         metadata: null
       },
       {
-        id: 'dummy-pro-price-year',
+        id: 'manifestor-tier-year',
         currency: 'USD',
-        unit_amount: 29990,
+        unit_amount: 144000, // $1,440
         interval: 'year',
         interval_count: 1,
         trial_period_days: null,
         type: 'recurring',
         active: true,
-        product_id: 'dummy-pro',
+        product_id: 'manifestor-tier',
         description: null,
         metadata: null
       }
@@ -139,33 +134,33 @@ export const dummyPricing: ProductWithPrices[] = [
     active: null
   },
   {
-    id: 'dummy-enterprise',
-    name: 'Enterprise Plan',
-    description: 'For large organizations',
+    id: 'ascension-tier',
+    name: 'Ascension Tier',
+    description: 'For serious seekers, creators, and leaders who want direct access.',
     prices: [
       {
-        id: 'dummy-enterprise-price-month',
+        id: 'ascension-tier-month',
         currency: 'USD',
-        unit_amount: 9999,
+        unit_amount: 44400, // $444
         interval: 'month',
         interval_count: 1,
         trial_period_days: null,
         type: 'recurring',
         active: true,
-        product_id: 'dummy-enterprise',
+        product_id: 'ascension-tier',
         description: null,
         metadata: null
       },
       {
-        id: 'dummy-enterprise-price-year',
+        id: 'ascension-tier-year',
         currency: 'USD',
-        unit_amount: 99990,
+        unit_amount: 444000, // $4,440
         interval: 'year',
         interval_count: 1,
         trial_period_days: null,
         type: 'recurring',
         active: true,
-        product_id: 'dummy-enterprise',
+        product_id: 'ascension-tier',
         description: null,
         metadata: null
       }

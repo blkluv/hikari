@@ -2,33 +2,33 @@
 
 export const faqItems = [
   {
-    question: 'Is everything really included in the price?',
+    question: 'Is everything included in my subscription?',
     answer:
-      'Yes, everything is included in the price. There are no hidden fees or additional charges.'
+      'Yes! Your subscription includes access to daily huddles, livestream classes, community chat, tribe memecoins, tokenized rewards, and all Hahz.live content. No hidden fees.'
   },
   {
-    question: 'How do revisions work?',
+    question: 'Can I get 1-on-1 coaching?',
     answer:
-      "You can request revisions within the first 30 days of your project. We'll work with you to make any necessary changes."
+      'Absolutely! Our Ascension Tier includes monthly 1-on-1 spiritual coaching sessions, priority spotlight in livestreams, and exclusive VIP perks.'
   },
   {
-    question: 'What do you mean by high-converting?',
+    question: 'How do the tribe memecoins work?',
     answer:
-      'High-converting means our designs are optimized to drive more conversions, such as signups, purchases, or other desired actions.'
+      'Tribe memecoins are earned by participating in daily huddles, classes, and community challenges. They can be redeemed for rewards, NFTs, or special perks within Hahz.live.'
   },
   {
-    question: 'What does site optimization mean exactly?',
+    question: 'What are tokenized rewards?',
     answer:
-      'Site optimization refers to the process of improving the performance, user experience, and search engine visibility of your website.'
+      'Tokenized rewards are special memecoin/stablecoin airdrops or NFT drops that recognize your participation and achievements in the Hahz.live community.'
   },
   {
-    question: 'Why do you use Framer?',
+    question: 'Can I join the community without livestreams?',
     answer:
-      'We use Framer because it allows us to create highly interactive and visually stunning designs with ease.'
+      'Yes, you can still join the private chat, participate in discussions, and earn memecoins, but full access to live classes requires an active subscription.'
   },
   {
-    question: 'Are there any refunds?',
+    question: 'Are there refunds or trials?',
     answer:
-      "We offer a 30-day money-back guarantee. If you're not satisfied with our services, you can request a full refund."
+      'We offer a 3-day trial for new users to explore Hahz.live. Refunds are available if you are not satisfied within the first 7 days of your paid subscription.'
   }
 ];

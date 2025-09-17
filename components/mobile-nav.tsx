@@ -23,12 +23,12 @@ export function MobileNav({ items, children, user }: MobileNavProps) {
         'fixed inset-0 mx-auto z-50 top-4 w-full grid h-[calc(100vh-4rem)] grid-flow-row auto-rows-max overflow-auto p-6 pb-32 shadow-md animate-in slide-in-from-bottom-80 md:hidden'
       )}
     >
-      <div className="relative z-20 grid gap-6 rounded-md bg-popover p-4 text-popover-foreground shadow-md">
+      <div className="relative z-20 grid gap-6 p-4 rounded-md shadow-md bg-popover text-popover-foreground">
         <Link href="/" className="flex items-center space-x-2">
           <Icons.Eclipse />
-          <span className="font-bold">Hikari</span>
+          <span className="font-bold">HAHZ.LIVE</span>
         </Link>
-        <nav className="grid grid-flow-row auto-rows-max text-sm items-center flex text-center">
+        <nav className="flex grid items-center grid-flow-row text-sm text-center auto-rows-max">
           {items.map((item, index) => (
             <Link
               key={index}
@@ -42,7 +42,7 @@ export function MobileNav({ items, children, user }: MobileNavProps) {
             </Link>
           ))}
         </nav>
-        <div className="flex items-center space-x-2 mt-4">
+        <div className="flex items-center mt-4 space-x-2">
           <ModeToggle />
           <Link
             href={user ? '/dashboard' : '/login'}

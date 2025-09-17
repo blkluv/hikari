@@ -1,86 +1,86 @@
 export const testimonials = [
   {
     name: 'dcodesdev',
-    title: 'TypeScript Developer',
+    title: 'Crypto & Chill Dev',
     avatarFallback: 'DC',
     avatarImg: '/images/dcodes.png',
-    text: "That's beautiful bro!"
+    text: "Hahz.live got me vibin’ daily 🔥 Love the tribe energy!"
   },
   {
     name: 'SuhailKakar',
-    title: 'Developer at joinOnboard',
+    title: 'Growth Hacker & Dev',
     avatarFallback: 'SK',
     avatarImg: '/images/SuhailKakar.jpg',
-    text: "If you've built this a few months ago, it would have saved me hours :D"
+    text: "Bro, these daily huddles actually keep me on track 💯"
   },
   {
     name: 'SaidAitmbarek',
-    title: 'Founder of microlaunch.net',
+    title: 'Founder & Crypto Explorer',
     avatarFallback: 'SA',
     avatarImg: '/images/said.jpg',
-    text: "So cool, looks really clean. Any plan to open source it? ☺️ Wanna play with it!"
+    text: "Lowkey obsessed with the memecoin rewards 😎 Feels like gamified growth"
   },
   {
     name: 'magicuidesign',
-    title: 'UI Design Company',
+    title: 'UI/UX Wizard',
     avatarFallback: 'MU',
     avatarImg: '/images/magicui.jpg',
-    text: "Clean 🤌"
+    text: "Clean vibes only 🫶 Hahz.live is a whole mood"
   },
   {
     name: 'YasmeenRoumie',
-    title: 'Developer',
+    title: 'Code Ninja & Spiritual Seeker',
     avatarFallback: 'YR',
     avatarImg: '/images/yasmeen.jpg',
-    text: "Ooh would love to try this out"
+    text: "Omg these 1-on-1 sessions hit different ✨"
   },
   {
     name: 'shadcn',
-    title: 'Developer',
+    title: 'Frontend Alchemist',
     avatarFallback: 'SC',
     avatarImg: '/images/shadcn.jpg',
-    text: "👀"
+    text: "👀 Not gonna lie, this platform is next level"
   },
   {
     name: 'bzagrodzki',
-    title: 'Developer',
+    title: 'Design & Dev Enthusiast',
     avatarFallback: 'BZ',
     avatarImg: '/images/bzrag.jpg',
-    text: "Nice one! But I would prefer some more \"sans\" font 😉"
+    text: "Lowkey loving the tribe memecoins 💰 Makes showing up fun"
   },
   {
     name: 'MPlegas',
-    title: 'Developer',
+    title: 'Web3 Explorer',
     avatarFallback: 'MP',
     avatarImg: '/images/MPlegas.jpg',
-    text: "Exceptional!"
+    text: "Big mood 🙌 These live classes actually stick with you"
   },
   {
     name: 'kvncyf_',
-    title: 'Developer',
+    title: 'Daily Huddle Addict',
     avatarFallback: 'KC',
     avatarImg: '/images/kvn.jpg',
-    text: "Nice move."
+    text: "The daily huddles are a vibe, ngl 😎"
   },
   {
     name: '0xRaduan',
-    title: 'Developer',
+    title: 'Crypto + Mindset Coach',
     avatarFallback: 'RA',
     avatarImg: '/images/0xraduan.jpg',
-    text: "This looks fire"
+    text: "Straight fire 🔥 Hahz.live is my go-to for spiritual + crypto grind"
   },
   {
     name: 'Luax0',
-    title: 'Developer',
+    title: 'NFT Collector & Visionary',
     avatarFallback: 'LX',
     avatarImg: '/images/luax0.jpg',
-    text: "Can't wait to see more 👀"
+    text: "Can’t wait for the next NFT drop 👀 This is addictive"
   },
   {
     name: 'ausrobdev',
-    title: 'Developer',
+    title: 'Open Source Dreamer',
     avatarFallback: 'RA',
     avatarImg: '/images/robdev.jpg',
-    text: "Let me know when its ready, I'll add it to buildatlightspeed.com - we need more high quality open source boilerplates"
+    text: "Bruh, Hahz.live just leveled up my daily routine 🚀 Need more like this!"
   }
 ];

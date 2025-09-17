@@ -11,24 +11,24 @@ import {
 
 export default function Footer() {
   return (
-    <footer className="bg-black text-gray-300 p-8 relative">
-      <div className="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-10 justify-between">
+    <footer className="relative p-8 text-gray-300 bg-black">
+      <div className="container grid justify-between grid-cols-1 gap-10 mx-auto md:grid-cols-3">
         <div>
-          <h2 className="text-md text-gray-300 font-bold mb-4">
+          <h2 className="mb-4 font-bold text-gray-300 text-md">
             {footerLinks.getInTouch.title}
           </h2>
-          <p className="text-xl text-gray-300 mb-4">
+          <p className="mb-4 text-xl text-gray-300">
             We partner with global brands, from startups to industry leaders.{' '}
-            <span className="text-white font-bold">Let's discuss.</span>
+            <span className="font-bold text-white">Let's discuss.</span>
           </p>
-          <h3 className="text-sm text-gray-300 font-bold mb-2">
+          <h3 className="mb-2 text-sm font-bold text-gray-300">
             Subscribe to our Newsletter
           </h3>
           <form className="flex">
             <Input
               type="email"
               placeholder="name@email.com"
-              className="p-2 flex-grow bg-gray-800 text-white rounded-sm border-black"
+              className="flex-grow p-2 text-white bg-gray-800 border-black rounded-sm"
             />
             <Button className="ml-2 bg-gray-700">Subscribe</Button>
           </form>
@@ -36,7 +36,7 @@ export default function Footer() {
         <div className="flex flex-col items-center mx-auto text-xs">
           <div className="flex">
             <div className="mr-8">
-              <h2 className="text-sm font-bold mb-4">
+              <h2 className="mb-4 text-sm font-bold">
                 {footerLinks.pages.title}
               </h2>
               <ul>
@@ -54,7 +54,7 @@ export default function Footer() {
               </ul>
             </div>
             <div>
-              <h2 className="text-sm font-bold mb-4">
+              <h2 className="mb-4 text-sm font-bold">
                 {footerLinks.utilityPages.title}
               </h2>
               <ul>
@@ -73,14 +73,14 @@ export default function Footer() {
             </div>
           </div>
         </div>
-        <div className="text-sm font-bold mb-4 w-fit justify-end mx-auto">
-          <h2 className="flex text-sm font-bold mb-4">
+        <div className="justify-end mx-auto mb-4 text-sm font-bold w-fit">
+          <h2 className="flex mb-4 text-sm font-bold">
             {footerLinks.location.title}
           </h2>
           <p className="mb-4 text-xs max-w-[150px]">
             {footerLinks.location.address}
           </p>
-          <h3 className="text-sm font-bold mb-2">
+          <h3 className="mb-2 text-sm font-bold">
             {footerLinks.location.socialLinksTitle}
           </h3>
           <div className="flex space-x-3">
@@ -99,10 +99,10 @@ export default function Footer() {
           </div>
         </div>
       </div>
-      <div className="mt-8 text-center text-gray-300 text-xs">
+      <div className="mt-8 text-xs text-center text-gray-300">
         <p>
-          Copyright ©2024{' '}
-          <span className="text-white font-bold">Webestica</span>. All rights
+          Copyright ©2025{' '}
+          <span className="font-bold text-white">HAHZ.LIVE</span>. All rights
           reserved.
         </p>
       </div>

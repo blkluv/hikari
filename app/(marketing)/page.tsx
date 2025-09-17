@@ -18,7 +18,7 @@ export default async function IndexPage() {
         <section className="my-16">
           <div className="flex items-center w-full mb-8">
             <div className="flex flex-col items-center justify-center w-full">
-              <h2 className="text-3xl font-bold">Community highlights</h2>
+              <h2 className="text-3xl font-bold">Tribe highlights</h2>
               <Link href="https://x.com/wizardofhahz" target="_blank" rel="noopener noreferrer" className="mt-2 text-blue-500 hover:underline">
                Join the tribe
               </Link>

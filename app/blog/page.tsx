@@ -22,7 +22,7 @@ export default function Page(): React.ReactElement {
 
   return (
     <main className="container max-sm:px-0 md:py-12">
-      <div className="rounded-lg overflow-hidden">
+      <div className="overflow-hidden rounded-lg">
         <div
           className="h-[300px] p-8 md:h-[400px] md:p-12"
           style={{
@@ -43,26 +43,26 @@ export default function Page(): React.ReactElement {
             ].join(', ')
           }}
         >
-          <h1 className="mb-4 border-b-4 border-foreground pb-2 text-4xl font-bold md:text-5xl">
-            Hikari Blog
+          <h1 className="pb-2 mb-4 text-4xl font-bold border-b-4 border-foreground md:text-5xl">
+            HAHZ.LIVE BLOG
           </h1>
           <p className="text-sm md:text-base">
-            Design language and easability of use
+            Learn how to manifest your higher purpose.
           </p>
         </div>
-        <div className="mt-2 grid grid-cols-1 border md:grid-cols-3 lg:grid-cols-4 rounded-b-lg">
+        <div className="grid grid-cols-1 mt-2 border rounded-b-lg md:grid-cols-3 lg:grid-cols-4">
           {posts.map((post) => (
             <Link
               key={post.url}
               href={post.url}
-              className="flex flex-col bg-card p-4 transition-colors hover:bg-accent hover:text-accent-foreground"
+              className="flex flex-col p-4 transition-colors bg-card hover:bg-accent hover:text-accent-foreground"
             >
               <p className="font-medium">{post.data.title}</p>
               <p className="text-sm text-muted-foreground">
                 {post.data.description}
               </p>
 
-              <p className="mt-auto pt-4 text-xs text-muted-foreground">
+              <p className="pt-4 mt-auto text-xs text-muted-foreground">
                 {new Date(post.data.date ?? post.file.name).toDateString()}
               </p>
             </Link>
