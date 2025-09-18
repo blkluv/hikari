@@ -8,17 +8,15 @@ import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
+import { supabase } from '@/utils/supabase-client'; // <- safe to import inside client component
 
-export default function SignUp({ supabase }: { supabase: any }) {
+export default function SignUp() {
   const router = useRouter();
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
-
-    // Only run this client-side
-    if (typeof window === 'undefined') return;
 
     const formData = new FormData(e.currentTarget);
     const name = formData.get('name') as string;
@@ -42,7 +40,6 @@ export default function SignUp({ supabase }: { supabase: any }) {
   };
 
   const handleOAuthSignUp = async (provider: 'github' | 'google') => {
-    if (typeof window === 'undefined') return;
     try {
       const { error } = await supabase.auth.signInWithOAuth({
         provider,
@@ -67,6 +64,7 @@ export default function SignUp({ supabase }: { supabase: any }) {
           <span className="sr-only">Back</span>
         </Link>
       </div>
+
       <div className="flex items-center justify-center flex-1">
         <Card className="w-full max-w-md">
           <CardContent className="grid gap-4 px-4 pb-4 my-10">
