@@ -6,19 +6,52 @@ import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
-import { signUp } from '@/utils/auth-helpers/server';
-import { handleRequest } from '@/utils/auth-helpers/client';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
+import { supabase } from '@/utils/supabase-client';
 
 export default function SignUp() {
   const router = useRouter();
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+  // ---- Email + Password Sign Up ----
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    setIsSubmitting(true); // Disable the button while the request is being handled
-    await handleRequest(e, signUp, router);
-    setIsSubmitting(false);
+    e.preventDefault();
+    setIsSubmitting(true);
+
+    const formData = new FormData(e.currentTarget);
+    const name = formData.get('name') as string;
+    const email = formData.get('email') as string;
+    const password = formData.get('password') as string;
+
+    try {
+      const { error } = await supabase.auth.signUp({
+        email,
+        password,
+        options: { data: { name } },
+      });
+      if (error) throw error;
+      router.push('/'); // redirect after signup
+    } catch (err) {
+      console.error(err);
+      alert('Error signing up. Check console for details.');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  // ---- OAuth Sign Up ----
+  const handleOAuthSignUp = async (provider: 'github' | 'google') => {
+    try {
+      const { error } = await supabase.auth.signInWithOAuth({
+        provider,
+        options: { redirectTo: `${window.location.origin}/` },
+      });
+      if (error) throw error;
+    } catch (err) {
+      console.error(err);
+      alert(`Error with ${provider} signup.`);
+    }
   };
 
   return (
@@ -26,10 +59,10 @@ export default function SignUp() {
       <div className="flex items-center justify-between mb-8">
         <Link
           href="/signin"
-          className="rounded-md p-2 transition-colors hover:bg-muted"
+          className="p-2 transition-colors rounded-md hover:bg-muted"
           prefetch={false}
         >
-          <ArrowLeftIcon className="h-5 w-5" />
+          <ArrowLeftIcon className="w-5 h-5" />
           <span className="sr-only">Back</span>
         </Link>
         <div />
@@ -39,15 +72,13 @@ export default function SignUp() {
           <CardContent className="grid gap-4 px-4 pb-4 my-10">
             <div className="space-y-1 text-center">
               <h2 className="text-2xl font-bold">Sign Up</h2>
-              <p className="text-muted-foreground my-2">
+              <p className="my-2 text-muted-foreground">
                 Enter your details below to create an account
               </p>
             </div>
-            <form
-              noValidate={true}
-              className="grid gap-4"
-              onSubmit={(e) => handleSubmit(e)}
-            >
+
+            {/* Email + Password Sign Up */}
+            <form noValidate className="grid gap-4" onSubmit={handleSubmit}>
               <div className="grid gap-2">
                 <Label htmlFor="name">Name</Label>
                 <Input
@@ -75,13 +106,15 @@ export default function SignUp() {
                 <Label htmlFor="password">Password</Label>
                 <Input id="password" type="password" name="password" required />
               </div>
-              <Button type="submit" className="w-full" loading={isSubmitting}>
-                Sign up
+              <Button type="submit" className="w-full" disabled={isSubmitting}>
+                {isSubmitting ? 'Signing up...' : 'Sign up'}
               </Button>
             </form>
-            <div className="text-center text-sm text-muted-foreground">
+
+            <div className="text-sm text-center text-muted-foreground">
               <span>Sign up with email and password</span>
             </div>
+
             <div className="flex justify-center">
               <Link
                 href="/signin"
@@ -91,20 +124,28 @@ export default function SignUp() {
                 Already have an account? Sign in
               </Link>
             </div>
+
             <Separator className="my-6" />
+
+            {/* OAuth Buttons */}
             <div className="grid gap-2">
-              <Button variant="outline" className="w-full">
-                <GithubIcon className="mr-2 h-4 w-4" />
+              <Button
+                variant="outline"
+                className="w-full"
+                onClick={() => handleOAuthSignUp('github')}
+              >
+                <GithubIcon className="w-4 h-4 mr-2" />
                 Sign up with GitHub
               </Button>
-              <Button variant="outline" className="w-full" disabled={true}>
-                <ChromeIcon className="mr-2 h-4 w-4" />
+              <Button
+                variant="outline"
+                className="w-full"
+                onClick={() => handleOAuthSignUp('google')}
+              >
+                <ChromeIcon className="w-4 h-4 mr-2" />
                 Sign up with Google
               </Button>
             </div>
-            <p className="text-muted-foreground text-xs text-center my-2">
-              For testing purposes, only Github is available.
-            </p>
           </CardContent>
         </Card>
       </div>
