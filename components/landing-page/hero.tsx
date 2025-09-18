@@ -90,10 +90,10 @@ export default function HeroSection() {
 
           <div className="flex flex-wrap justify-center gap-4">
             <Link
-              href="/login"
+              href="https://t.me/hahznft"
               className={cn(buttonVariants({ size: 'xl' }), 'rounded-full border-2 border-primary dark:border-white text-bold text-white')}
             >
-              Tap In
+              Tap In on Telegram
             </Link>
 
             {siteConfig.links.github && (
