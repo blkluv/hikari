@@ -20,20 +20,16 @@ export default function SignIn() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
+
     try {
       const formData = new FormData(e.currentTarget);
       const email = formData.get('email') as string;
       const password = formData.get('password') as string;
-      
-      const { error } = await supabase.auth.signInWithPassword({
-        email,
-        password,
-      });
-      
-      if (error) {
-        alert(error.message);
-        return;
-      }
+
+      const { error } = await supabase.auth.signInWithPassword({ email, password });
+
+      if (error) throw error;
+
       router.push('/');
     } catch (err: any) {
       alert(err.message || 'Failed to sign in');
@@ -42,30 +38,18 @@ export default function SignIn() {
     }
   };
 
-  // ---- OAuth Providers ----
-  const oAuthProviders = [
-    { name: 'github', displayName: 'GitHub', icon: <Github className="w-4 h-4 mr-2" /> },
-    { name: 'google', displayName: 'Google', icon: <Chrome className="w-4 h-4 mr-2" /> },
-  ];
-
-  const handleOAuthSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  // ---- OAuth Login ----
+  const handleOAuthSignIn = async (provider: 'github' | 'google') => {
     setIsSubmitting(true);
     try {
-      const formData = new FormData(e.currentTarget);
-      const provider = formData.get('provider') as 'github' | 'google';
-      
       const { error } = await supabase.auth.signInWithOAuth({
         provider,
         options: {
-          redirectTo: `${window.location.origin}/auth/callback`,
+          redirectTo: `${window.location.origin}/auth/callback`, // Ensure this page exists
         },
       });
-      
-      if (error) {
-        alert(error.message);
-        return;
-      }
+
+      if (error) throw error;
     } catch (err: any) {
       alert(err.message || 'Failed to sign in with OAuth');
     } finally {
@@ -88,7 +72,7 @@ export default function SignIn() {
             <div className="space-y-1 text-center">
               <h2 className="text-2xl font-bold">Sign In</h2>
               <p className="my-2 text-muted-foreground">
-                Enter your email below to sign in to your account
+                Enter your email or use a Web3 wallet to sign in.
               </p>
             </div>
 
@@ -96,24 +80,24 @@ export default function SignIn() {
             <form noValidate className="grid gap-4" onSubmit={handleSubmit}>
               <div className="grid gap-2">
                 <Label htmlFor="email">Email</Label>
-                <Input 
-                  id="email" 
-                  type="email" 
-                  name="email" 
-                  placeholder="name@example.com" 
-                  required 
+                <Input
+                  id="email"
+                  type="email"
+                  name="email"
+                  placeholder="name@example.com"
                   autoComplete="email"
+                  required
                 />
               </div>
               <div className="grid gap-2">
                 <Label htmlFor="password">Password</Label>
-                <Input 
-                  id="password" 
-                  type="password" 
-                  name="password" 
-                  placeholder="Password" 
-                  required 
+                <Input
+                  id="password"
+                  type="password"
+                  name="password"
+                  placeholder="Password"
                   autoComplete="current-password"
+                  required
                 />
               </div>
               <Button type="submit" className="w-full" disabled={isSubmitting}>
@@ -134,21 +118,24 @@ export default function SignIn() {
 
             <Separator className="my-6" />
 
-            {/* OAuth Providers */}
+            {/* OAuth Buttons */}
             <div className="grid gap-2">
-              {oAuthProviders.map((provider) => (
-                <form key={provider.name} className="pb-2" onSubmit={handleOAuthSubmit}>
-                  <input type="hidden" name="provider" value={provider.name} />
-                  <Button 
-                    variant="outline" 
-                    type="submit" 
-                    className="w-full" 
-                    disabled={isSubmitting}
-                  >
-                    {provider.icon} Sign in with {provider.displayName}
-                  </Button>
-                </form>
-              ))}
+              <Button
+                variant="outline"
+                className="w-full"
+                onClick={() => handleOAuthSignIn('github')}
+                disabled={isSubmitting}
+              >
+                <Github className="w-4 h-4 mr-2" /> Sign in with GitHub
+              </Button>
+              <Button
+                variant="outline"
+                className="w-full"
+                onClick={() => handleOAuthSignIn('google')}
+                disabled={isSubmitting}
+              >
+                <Chrome className="w-4 h-4 mr-2" /> Sign in with Google
+              </Button>
             </div>
           </CardContent>
         </Card>
