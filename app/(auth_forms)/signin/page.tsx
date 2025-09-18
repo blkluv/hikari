@@ -8,7 +8,7 @@ import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
-import { Github, Chrome } from 'lucide-react';
+import { Github, Chrome, Linkedin } from 'lucide-react'; // Added Linkedin icon
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
 
 export default function SignIn() {
@@ -39,13 +39,13 @@ export default function SignIn() {
   };
 
   // ---- OAuth Login ----
-  const handleOAuthSignIn = async (provider: 'github' | 'google') => {
+  const handleOAuthSignIn = async (provider: 'github' | 'google' | 'linkedin') => {
     setIsSubmitting(true);
     try {
       const { error } = await supabase.auth.signInWithOAuth({
         provider,
         options: {
-          redirectTo: `${window.location.origin}/auth/callback`, // Ensure this page exists
+          redirectTo: `${window.location.origin}/auth/callback`,
         },
       });
 
@@ -72,7 +72,7 @@ export default function SignIn() {
             <div className="space-y-1 text-center">
               <h2 className="text-2xl font-bold">Sign In</h2>
               <p className="my-2 text-muted-foreground">
-                Enter your email or use a Web3 wallet to sign in.
+                Enter your email or use an OAuth provider to sign in.
               </p>
             </div>
 
@@ -135,6 +135,14 @@ export default function SignIn() {
                 disabled={isSubmitting}
               >
                 <Chrome className="w-4 h-4 mr-2" /> Sign in with Google
+              </Button>
+              <Button
+                variant="outline"
+                className="w-full"
+                onClick={() => handleOAuthSignIn('linkedin')}
+                disabled={isSubmitting}
+              >
+                <Linkedin className="w-4 h-4 mr-2" /> Sign in with LinkedIn
               </Button>
             </div>
           </CardContent>
