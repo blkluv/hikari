@@ -4,26 +4,26 @@
   },
   "fixtures": [
     {
-      "name": "prod_basic",
+      "name": "prod_tribe",
       "path": "/v1/products",
       "method": "post",
       "params": {
-        "name": "Starter",
-        "description": "Kickstart your journey with essential templates and community access.",
+        "name": "Tribe Tier",
+        "description": "Perfect for those starting their journey in the purpose economy.",
         "metadata": {
           "index": "0"
         }
       }
     },
     {
-      "name": "price_starter_month",
+      "name": "price_tribe_month",
       "path": "/v1/prices",
       "method": "post",
       "params": {
-        "product": "${prod_basic:id}",
+        "product": "${prod_tribe:id}",
         "currency": "usd",
         "billing_scheme": "per_unit",
-        "unit_amount": 1900,
+        "unit_amount": 4400,
         "recurring": {
           "interval": "month",
           "interval_count": 1
@@ -31,14 +31,14 @@
       }
     },
     {
-      "name": "price_starter_year",
+      "name": "price_tribe_year",
       "path": "/v1/prices",
       "method": "post",
       "params": {
-        "product": "${prod_basic:id}",
+        "product": "${prod_tribe:id}",
         "currency": "usd",
         "billing_scheme": "per_unit",
-        "unit_amount": 19000,
+        "unit_amount": 44000,
         "recurring": {
           "interval": "year",
           "interval_count": 1
@@ -46,26 +46,26 @@
       }
     },
     {
-      "name": "prod_pro",
+      "name": "prod_manifestor",
       "path": "/v1/products",
       "method": "post",
       "params": {
-        "name": "Pro",
-        "description": "For those who need advanced templates and enhanced community engagement.",
+        "name": "Manifestor Tier",
+        "description": "Best for those ready to level up spiritually & financially with group support.",
         "metadata": {
           "index": "1"
         }
       }
     },
     {
-      "name": "price_pro_month",
+      "name": "price_manifestor_month",
       "path": "/v1/prices",
       "method": "post",
       "params": {
-        "product": "${prod_pro:id}",
+        "product": "${prod_manifestor:id}",
         "currency": "usd",
         "billing_scheme": "per_unit",
-        "unit_amount": 4900,
+        "unit_amount": 14400,
         "recurring": {
           "interval": "month",
           "interval_count": 1
@@ -73,14 +73,14 @@
       }
     },
     {
-      "name": "price_pro_year",
+      "name": "price_manifestor_year",
       "path": "/v1/prices",
       "method": "post",
       "params": {
-        "product": "${prod_pro:id}",
+        "product": "${prod_manifestor:id}",
         "currency": "usd",
         "billing_scheme": "per_unit",
-        "unit_amount": 49000,
+        "unit_amount": 144000,
         "recurring": {
           "interval": "year",
           "interval_count": 1
@@ -88,26 +88,26 @@
       }
     },
     {
-      "name": "prod_enterprise",
+      "name": "prod_ascension",
       "path": "/v1/products",
       "method": "post",
       "params": {
-        "name": "Enterprise",
-        "description": "For organizations that require comprehensive templates and dedicated support.",
+        "name": "Ascension Tier",
+        "description": "For serious seekers, creators, and leaders who want direct access.",
         "metadata": {
-          "index": "3"
+          "index": "2"
         }
       }
     },
     {
-      "name": "price_enterprise_month",
+      "name": "price_ascension_month",
       "path": "/v1/prices",
       "method": "post",
       "params": {
-        "product": "${prod_enterprise:id}",
+        "product": "${prod_ascension:id}",
         "currency": "usd",
         "billing_scheme": "per_unit",
-        "unit_amount": 39900,
+        "unit_amount": 44400,
         "recurring": {
           "interval": "month",
           "interval_count": 1
@@ -115,14 +115,14 @@
       }
     },
     {
-      "name": "price_enterprise_year",
+      "name": "price_ascension_year",
       "path": "/v1/prices",
       "method": "post",
       "params": {
-        "product": "${prod_enterprise:id}",
+        "product": "${prod_ascension:id}",
         "currency": "usd",
         "billing_scheme": "per_unit",
-        "unit_amount": 399000,
+        "unit_amount": 444000,
         "recurring": {
           "interval": "year",
           "interval_count": 1

@@ -1,7 +1,7 @@
 id,product_id,active,description,unit_amount,currency,type,interval,interval_count,trial_period_days,metadata
-price_1Q03KEAPKjEYvGQXYW4SPLA0,prod_QrmuZPiFIkAj9e,true,,1900,usd,recurring,month,1,0,
-price_1Q03KEAPKjEYvGQXOq4WTLRZ,prod_QrmuZPiFIkAj9e,true,,19000,usd,recurring,year,1,0,
-price_1Q03KFAPKjEYvGQXxb0ABFmv,prod_QrmurjpbDzidkD,true,,4900,usd,recurring,month,1,0,
-price_1Q03KGAPKjEYvGQXD0XYfuHj,prod_QrmurjpbDzidkD,true,,49000,usd,recurring,year,1,0,
-price_1Q03KGAPKjEYvGQXkjgN6EVW,prod_QrmutCdmepcTuJ,true,,39900,usd,recurring,month,1,0,
-price_1Q03KHAPKjEYvGQXXAd9Z7Mb,prod_QrmutCdmepcTuJ,true,,399000,usd,recurring,year,1,0,
+price_1S8hMVEC5zyE604bRsfskiG2,prod_T4r49Ay2aJopUV,true,,4400,usd,recurring,month,1,0,
+price_1S8hN4EC5zyE604bH4f5cLDy,prod_T4r49Ay2aJopUV,true,,44000,usd,recurring,year,1,0,
+price_1S8hRgEC5zyE604bKgn6mu3Q,prod_T4r9ZgRmGrjArM,true,,14400,usd,recurring,month,1,0,
+price_1S8hRgEC5zyE604bjs8GRHZe,prod_T4r9ZgRmGrjArM,true,,144000,usd,recurring,year,1,0,
+price_1S8hTbEC5zyE604b5uBWnTjd,prod_T4rBelLltR2W2f,true,,44400,usd,recurring,month,1,0,
+price_1S8hcfEC5zyE604b0ASwjQub,prod_T4rBelLltR2W2f,true,,444000,usd,recurring,year,1,0,
