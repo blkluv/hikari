@@ -6,9 +6,7 @@ import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
-import {
-  signInWithPassword
-} from '@/utils/auth-helpers/server';
+import { signInWithPassword } from '@/utils/auth-helpers/server';
 import { signInWithOAuth, handleRequest } from '@/utils/auth-helpers/client';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
@@ -46,6 +44,14 @@ export default function SignIn() {
 
   // ---- Web3 Handlers ----
   const signInWithEthereum = async () => {
+    if (typeof window === 'undefined') return;
+
+    const ethereum = (window as any).ethereum;
+    if (!ethereum) {
+      alert('No Ethereum wallet detected');
+      return;
+    }
+
     try {
       setIsSubmitting(true);
       const { data, error } = await supabase.auth.signInWithWeb3({
@@ -60,17 +66,21 @@ export default function SignIn() {
   };
 
   const signInWithSolana = async () => {
+    if (typeof window === 'undefined') return;
+
+    const solana = (window as any).solana;
+    if (!solana) {
+      alert('No Solana wallet detected');
+      return;
+    }
+
     try {
-      if (!window.solana) {
-        alert('No Solana wallet detected');
-        return;
-      }
-      await window.solana.connect();
+      await solana.connect();
       setIsSubmitting(true);
       const { data, error } = await supabase.auth.signInWithWeb3({
         chain: 'solana',
         statement: 'I accept the Terms of Service at https://example.com/tos',
-        wallet: window.solana
+        wallet: solana,
       });
       if (error) console.error(error);
       if (data.session) router.push('/');
@@ -92,6 +102,7 @@ export default function SignIn() {
         </Link>
         <div />
       </div>
+
       <div className="flex items-center justify-center flex-1">
         <Card className="w-full max-w-md">
           <CardContent className="grid gap-4 px-4 pb-4 my-10">
