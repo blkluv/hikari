@@ -1,15 +1,14 @@
 'use client';
 
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { Card, CardContent } from '@/components/ui/card';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
-import { signInWithPassword } from '@/utils/auth-helpers/server';
 import { signInWithOAuth, handleRequest } from '@/utils/auth-helpers/client';
-import { useRouter } from 'next/navigation';
-import { useState } from 'react';
 import { Github, Chrome, Wallet } from 'lucide-react';
 import { supabase } from '@/utils/supabase-client';
 
@@ -17,73 +16,71 @@ export default function SignIn() {
   const router = useRouter();
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+  // ---- Email + Password Login ----
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     setIsSubmitting(true);
-    await handleRequest(e, signInWithPassword, router);
-    setIsSubmitting(false);
+    try {
+      await handleRequest(e, undefined, router); // Keep server call in helper
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
+  // ---- OAuth Providers ----
   const oAuthProviders = [
-    {
-      name: 'github',
-      displayName: 'GitHub',
-      icon: <Github className="w-4 h-4 mr-2" />
-    },
-    {
-      name: 'google',
-      displayName: 'Google',
-      icon: <Chrome className="w-4 h-4 mr-2" />
-    }
+    { name: 'github', displayName: 'GitHub', icon: <Github className="w-4 h-4 mr-2" /> },
+    { name: 'google', displayName: 'Google', icon: <Chrome className="w-4 h-4 mr-2" /> },
   ];
 
   const handleOAuthSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     setIsSubmitting(true);
-    await signInWithOAuth(e);
-    setIsSubmitting(false);
+    try {
+      await signInWithOAuth(e);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
-  // ---- Web3 Handlers ----
+  // ---- Web3 Sign In ----
   const signInWithEthereum = async () => {
-    if (typeof window === 'undefined') return;
-
-    const ethereum = (window as any).ethereum;
-    if (!ethereum) {
+    if (typeof window === 'undefined' || !window.ethereum) {
       alert('No Ethereum wallet detected');
       return;
     }
-
     try {
       setIsSubmitting(true);
       const { data, error } = await supabase.auth.signInWithWeb3({
         chain: 'ethereum',
         statement: 'I accept the Terms of Service at https://example.com/tos',
       });
-      if (error) console.error(error);
+      if (error) throw error;
       if (data.session) router.push('/');
+    } catch (err) {
+      console.error(err);
     } finally {
       setIsSubmitting(false);
     }
   };
 
   const signInWithSolana = async () => {
-    if (typeof window === 'undefined') return;
-
-    const solana = (window as any).solana;
-    if (!solana) {
+    if (typeof window === 'undefined' || !window.solana) {
       alert('No Solana wallet detected');
       return;
     }
-
     try {
-      await solana.connect();
+      await window.solana.connect(); // ensure wallet is connected
       setIsSubmitting(true);
       const { data, error } = await supabase.auth.signInWithWeb3({
         chain: 'solana',
         statement: 'I accept the Terms of Service at https://example.com/tos',
-        wallet: solana,
+        wallet: window.solana,
       });
-      if (error) console.error(error);
+      if (error) throw error;
       if (data.session) router.push('/');
+    } catch (err) {
+      console.error(err);
     } finally {
       setIsSubmitting(false);
     }
@@ -92,15 +89,10 @@ export default function SignIn() {
   return (
     <div className="flex min-h-[100dvh] flex-col bg-background px-4 py-12 sm:px-6 lg:px-8">
       <div className="flex items-center justify-between mb-8">
-        <Link
-          href="/"
-          className="p-2 transition-colors rounded-md hover:bg-muted"
-          prefetch={false}
-        >
+        <Link href="/" className="p-2 transition-colors rounded-md hover:bg-muted" prefetch={false}>
           <ArrowLeftIcon className="w-5 h-5" />
           <span className="sr-only">Back</span>
         </Link>
-        <div />
       </div>
 
       <div className="flex items-center justify-center flex-1">
@@ -109,7 +101,7 @@ export default function SignIn() {
             <div className="space-y-1 text-center">
               <h2 className="text-2xl font-bold">Sign In</h2>
               <p className="my-2 text-muted-foreground">
-                Enter your email below to sign in to your account
+                Enter your email below or use a Web3 wallet to sign in.
               </p>
             </div>
 
@@ -117,26 +109,11 @@ export default function SignIn() {
             <form noValidate className="grid gap-4" onSubmit={handleSubmit}>
               <div className="grid gap-2">
                 <Label htmlFor="email">Email</Label>
-                <Input
-                  id="email"
-                  type="email"
-                  name="email"
-                  placeholder="name@example.com"
-                  autoCapitalize="none"
-                  autoComplete="email"
-                  autoCorrect="off"
-                  required
-                />
+                <Input id="email" type="email" name="email" placeholder="name@example.com" required />
               </div>
               <div className="grid gap-2">
                 <Label htmlFor="password">Password</Label>
-                <Input
-                  id="password"
-                  type="password"
-                  name="password"
-                  placeholder="Password"
-                  required
-                />
+                <Input id="password" type="password" name="password" placeholder="Password" required />
               </div>
               <Button type="submit" className="w-full" disabled={isSubmitting}>
                 Sign in
@@ -144,20 +121,12 @@ export default function SignIn() {
             </form>
 
             <div className="flex justify-center">
-              <Link
-                href="/signup"
-                className="text-sm font-medium hover:underline underline-offset-4"
-                prefetch={false}
-              >
+              <Link href="/signup" className="text-sm font-medium hover:underline underline-offset-4" prefetch={false}>
                 Don't have an account? Sign up
               </Link>
             </div>
             <div className="flex justify-center">
-              <Link
-                href="/forgot_password"
-                className="text-sm font-bold hover:underline underline-offset-4"
-                prefetch={false}
-              >
+              <Link href="/forgot_password" className="text-sm font-bold hover:underline underline-offset-4" prefetch={false}>
                 Forgot your password?
               </Link>
             </div>
@@ -167,20 +136,10 @@ export default function SignIn() {
             {/* OAuth Providers */}
             <div className="grid gap-2">
               {oAuthProviders.map((provider) => (
-                <form
-                  key={provider.name}
-                  className="pb-2"
-                  onSubmit={(e) => handleOAuthSubmit(e)}
-                >
+                <form key={provider.name} className="pb-2" onSubmit={handleOAuthSubmit}>
                   <input type="hidden" name="provider" value={provider.name} />
-                  <Button
-                    variant="outline"
-                    type="submit"
-                    className="w-full"
-                    disabled={isSubmitting}
-                  >
-                    {provider.icon}
-                    Sign in with {provider.displayName}
+                  <Button variant="outline" type="submit" className="w-full" disabled={isSubmitting}>
+                    {provider.icon} Sign in with {provider.displayName}
                   </Button>
                 </form>
               ))}
@@ -188,26 +147,13 @@ export default function SignIn() {
 
             {/* Web3 Buttons */}
             <div className="grid gap-2 mt-4">
-              <Button
-                variant="outline"
-                onClick={signInWithEthereum}
-                className="w-full"
-                disabled={isSubmitting}
-              >
-                <Wallet className="w-4 h-4 mr-2" />
-                Sign in with Ethereum
+              <Button variant="outline" onClick={signInWithEthereum} className="w-full" disabled={isSubmitting}>
+                <Wallet className="w-4 h-4 mr-2" /> Sign in with Ethereum
               </Button>
-              <Button
-                variant="outline"
-                onClick={signInWithSolana}
-                className="w-full"
-                disabled={isSubmitting}
-              >
-                <Wallet className="w-4 h-4 mr-2" />
-                Sign in with Solana
+              <Button variant="outline" onClick={signInWithSolana} className="w-full" disabled={isSubmitting}>
+                <Wallet className="w-4 h-4 mr-2" /> Sign in with Solana
               </Button>
             </div>
-
           </CardContent>
         </Card>
       </div>
@@ -217,18 +163,7 @@ export default function SignIn() {
 
 function ArrowLeftIcon(props: any) {
   return (
-    <svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
+    <svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
       <path d="m12 19-7-7 7-7" />
       <path d="M19 12H5" />
     </svg>
