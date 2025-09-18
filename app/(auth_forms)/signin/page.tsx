@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { Card, CardContent } from '@/components/ui/card';
@@ -8,31 +8,13 @@ import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
-import { Github, Chrome, Wallet } from 'lucide-react';
+import { Github, Chrome } from 'lucide-react';
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
-
-// Define window types for Web3 wallets
-declare global {
-  interface Window {
-    ethereum?: any;
-    solana?: any;
-    phantom?: any;
-    braveSolana?: any;
-  }
-}
 
 export default function SignIn() {
   const router = useRouter();
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [hasEthereum, setHasEthereum] = useState(false);
-  const [hasSolana, setHasSolana] = useState(false);
   const supabase = createClientComponentClient();
-
-  // Check for Web3 wallets on component mount
-  useEffect(() => {
-    setHasEthereum(typeof window !== 'undefined' && !!window.ethereum);
-    setHasSolana(typeof window !== 'undefined' && !!window.solana);
-  }, []);
 
   // ---- Email + Password Login ----
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -91,55 +73,6 @@ export default function SignIn() {
     }
   };
 
-  // ---- Web3 Sign In ----
-  const signInWithEthereum = async () => {
-    if (!hasEthereum) {
-      alert('No Ethereum wallet detected. Please install MetaMask or another Ethereum wallet.');
-      return;
-    }
-    try {
-      setIsSubmitting(true);
-      const { data, error } = await supabase.auth.signInWithWeb3({
-        chain: 'ethereum',
-        statement: 'I accept the Terms of Service at https://example.com/tos',
-      });
-      if (error) throw error;
-      if (data.session) router.push('/');
-    } catch (err: any) {
-      console.error('Ethereum sign-in error:', err);
-      alert(err.message || 'Failed to sign in with Ethereum');
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
-
-  const signInWithSolana = async () => {
-    if (!hasSolana) {
-      alert('No Solana wallet detected. Please install Phantom or another Solana wallet.');
-      return;
-    }
-    try {
-      setIsSubmitting(true);
-      
-      // Connect to Solana wallet first
-      if (window.solana && !window.solana.isConnected) {
-        await window.solana.connect();
-      }
-      
-      const { data, error } = await supabase.auth.signInWithWeb3({
-        chain: 'solana',
-        statement: 'I accept the Terms of Service at https://example.com/tos',
-      });
-      if (error) throw error;
-      if (data.session) router.push('/');
-    } catch (err: any) {
-      console.error('Solana sign-in error:', err);
-      alert(err.message || 'Failed to sign in with Solana');
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
-
   return (
     <div className="flex min-h-[100dvh] flex-col bg-background px-4 py-12 sm:px-6 lg:px-8">
       <div className="flex items-center justify-between mb-8">
@@ -155,7 +88,7 @@ export default function SignIn() {
             <div className="space-y-1 text-center">
               <h2 className="text-2xl font-bold">Sign In</h2>
               <p className="my-2 text-muted-foreground">
-                Enter your email or use a Web3 wallet to sign in.
+                Enter your email below to sign in to your account
               </p>
             </div>
 
@@ -216,30 +149,6 @@ export default function SignIn() {
                   </Button>
                 </form>
               ))}
-            </div>
-
-            <Separator className="my-6" />
-
-            {/* Web3 Buttons */}
-            <div className="grid gap-2">
-              <Button 
-                variant="outline" 
-                onClick={signInWithEhereum} 
-                className="w-full" 
-                disabled={isSubmitting || !hasEthereum}
-              >
-                <Wallet className="w-4 h-4 mr-2" /> 
-                {hasEthereum ? 'Sign in with Ethereum' : 'Install Ethereum Wallet'}
-              </Button>
-              <Button 
-                variant="outline" 
-                onClick={signInWithSolana} 
-                className="w-full" 
-                disabled={isSubmitting || !hasSolana}
-              >
-                <Wallet className="w-4 h-4 mr-2" /> 
-                {hasSolana ? 'Sign in with Solana' : 'Install Solana Wallet'}
-              </Button>
             </div>
           </CardContent>
         </Card>
