@@ -8,9 +8,11 @@ import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
-import { signInWithOAuth, handleRequest } from '@/utils/auth-helpers/client';
 import { Github, Chrome, Wallet } from 'lucide-react';
 import { supabase } from '@/utils/supabase-client';
+
+// Ensure client-only helpers
+import { handleRequestClient, signInWithOAuthClient } from '@/utils/auth-helpers/client';
 
 export default function SignIn() {
   const router = useRouter();
@@ -21,7 +23,7 @@ export default function SignIn() {
     e.preventDefault();
     setIsSubmitting(true);
     try {
-      await handleRequest(e, undefined, router); // Keep server call in helper
+      await handleRequestClient(e, router);
     } finally {
       setIsSubmitting(false);
     }
@@ -37,7 +39,7 @@ export default function SignIn() {
     e.preventDefault();
     setIsSubmitting(true);
     try {
-      await signInWithOAuth(e);
+      await signInWithOAuthClient(e);
     } finally {
       setIsSubmitting(false);
     }
@@ -70,7 +72,7 @@ export default function SignIn() {
       return;
     }
     try {
-      await window.solana.connect(); // ensure wallet is connected
+      await window.solana.connect();
       setIsSubmitting(true);
       const { data, error } = await supabase.auth.signInWithWeb3({
         chain: 'solana',
@@ -101,7 +103,7 @@ export default function SignIn() {
             <div className="space-y-1 text-center">
               <h2 className="text-2xl font-bold">Sign In</h2>
               <p className="my-2 text-muted-foreground">
-                Enter your email below or use a Web3 wallet to sign in.
+                Enter your email or use a Web3 wallet to sign in.
               </p>
             </div>
 
