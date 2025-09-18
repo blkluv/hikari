@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { Card, CardContent } from '@/components/ui/card';
@@ -9,21 +9,52 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import { Github, Chrome, Wallet } from 'lucide-react';
-import { supabase } from '@/utils/supabase-client';
+import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
 
-// Ensure client-only helpers
-import { handleRequestClient, signInWithOAuthClient } from '@/utils/auth-helpers/client';
+// Define window types for Web3 wallets
+declare global {
+  interface Window {
+    ethereum?: any;
+    solana?: any;
+    phantom?: any;
+    braveSolana?: any;
+  }
+}
 
 export default function SignIn() {
   const router = useRouter();
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [hasEthereum, setHasEthereum] = useState(false);
+  const [hasSolana, setHasSolana] = useState(false);
+  const supabase = createClientComponentClient();
+
+  // Check for Web3 wallets on component mount
+  useEffect(() => {
+    setHasEthereum(typeof window !== 'undefined' && !!window.ethereum);
+    setHasSolana(typeof window !== 'undefined' && !!window.solana);
+  }, []);
 
   // ---- Email + Password Login ----
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
     try {
-      await handleRequestClient(e, router);
+      const formData = new FormData(e.currentTarget);
+      const email = formData.get('email') as string;
+      const password = formData.get('password') as string;
+      
+      const { error } = await supabase.auth.signInWithPassword({
+        email,
+        password,
+      });
+      
+      if (error) {
+        alert(error.message);
+        return;
+      }
+      router.push('/');
+    } catch (err: any) {
+      alert(err.message || 'Failed to sign in');
     } finally {
       setIsSubmitting(false);
     }
@@ -39,7 +70,22 @@ export default function SignIn() {
     e.preventDefault();
     setIsSubmitting(true);
     try {
-      await signInWithOAuthClient(e);
+      const formData = new FormData(e.currentTarget);
+      const provider = formData.get('provider') as 'github' | 'google';
+      
+      const { error } = await supabase.auth.signInWithOAuth({
+        provider,
+        options: {
+          redirectTo: `${window.location.origin}/auth/callback`,
+        },
+      });
+      
+      if (error) {
+        alert(error.message);
+        return;
+      }
+    } catch (err: any) {
+      alert(err.message || 'Failed to sign in with OAuth');
     } finally {
       setIsSubmitting(false);
     }
@@ -47,8 +93,8 @@ export default function SignIn() {
 
   // ---- Web3 Sign In ----
   const signInWithEthereum = async () => {
-    if (typeof window === 'undefined' || !window.ethereum) {
-      alert('No Ethereum wallet detected');
+    if (!hasEthereum) {
+      alert('No Ethereum wallet detected. Please install MetaMask or another Ethereum wallet.');
       return;
     }
     try {
@@ -59,30 +105,36 @@ export default function SignIn() {
       });
       if (error) throw error;
       if (data.session) router.push('/');
-    } catch (err) {
-      console.error(err);
+    } catch (err: any) {
+      console.error('Ethereum sign-in error:', err);
+      alert(err.message || 'Failed to sign in with Ethereum');
     } finally {
       setIsSubmitting(false);
     }
   };
 
   const signInWithSolana = async () => {
-    if (typeof window === 'undefined' || !window.solana) {
-      alert('No Solana wallet detected');
+    if (!hasSolana) {
+      alert('No Solana wallet detected. Please install Phantom or another Solana wallet.');
       return;
     }
     try {
-      await window.solana.connect();
       setIsSubmitting(true);
+      
+      // Connect to Solana wallet first
+      if (window.solana && !window.solana.isConnected) {
+        await window.solana.connect();
+      }
+      
       const { data, error } = await supabase.auth.signInWithWeb3({
         chain: 'solana',
         statement: 'I accept the Terms of Service at https://example.com/tos',
-        wallet: window.solana,
       });
       if (error) throw error;
       if (data.session) router.push('/');
-    } catch (err) {
-      console.error(err);
+    } catch (err: any) {
+      console.error('Solana sign-in error:', err);
+      alert(err.message || 'Failed to sign in with Solana');
     } finally {
       setIsSubmitting(false);
     }
@@ -111,14 +163,28 @@ export default function SignIn() {
             <form noValidate className="grid gap-4" onSubmit={handleSubmit}>
               <div className="grid gap-2">
                 <Label htmlFor="email">Email</Label>
-                <Input id="email" type="email" name="email" placeholder="name@example.com" required />
+                <Input 
+                  id="email" 
+                  type="email" 
+                  name="email" 
+                  placeholder="name@example.com" 
+                  required 
+                  autoComplete="email"
+                />
               </div>
               <div className="grid gap-2">
                 <Label htmlFor="password">Password</Label>
-                <Input id="password" type="password" name="password" placeholder="Password" required />
+                <Input 
+                  id="password" 
+                  type="password" 
+                  name="password" 
+                  placeholder="Password" 
+                  required 
+                  autoComplete="current-password"
+                />
               </div>
               <Button type="submit" className="w-full" disabled={isSubmitting}>
-                Sign in
+                {isSubmitting ? 'Signing in...' : 'Sign in'}
               </Button>
             </form>
 
@@ -140,20 +206,39 @@ export default function SignIn() {
               {oAuthProviders.map((provider) => (
                 <form key={provider.name} className="pb-2" onSubmit={handleOAuthSubmit}>
                   <input type="hidden" name="provider" value={provider.name} />
-                  <Button variant="outline" type="submit" className="w-full" disabled={isSubmitting}>
+                  <Button 
+                    variant="outline" 
+                    type="submit" 
+                    className="w-full" 
+                    disabled={isSubmitting}
+                  >
                     {provider.icon} Sign in with {provider.displayName}
                   </Button>
                 </form>
               ))}
             </div>
 
+            <Separator className="my-6" />
+
             {/* Web3 Buttons */}
-            <div className="grid gap-2 mt-4">
-              <Button variant="outline" onClick={signInWithEthereum} className="w-full" disabled={isSubmitting}>
-                <Wallet className="w-4 h-4 mr-2" /> Sign in with Ethereum
+            <div className="grid gap-2">
+              <Button 
+                variant="outline" 
+                onClick={signInWithEhereum} 
+                className="w-full" 
+                disabled={isSubmitting || !hasEthereum}
+              >
+                <Wallet className="w-4 h-4 mr-2" /> 
+                {hasEthereum ? 'Sign in with Ethereum' : 'Install Ethereum Wallet'}
               </Button>
-              <Button variant="outline" onClick={signInWithSolana} className="w-full" disabled={isSubmitting}>
-                <Wallet className="w-4 h-4 mr-2" /> Sign in with Solana
+              <Button 
+                variant="outline" 
+                onClick={signInWithSolana} 
+                className="w-full" 
+                disabled={isSubmitting || !hasSolana}
+              >
+                <Wallet className="w-4 h-4 mr-2" /> 
+                {hasSolana ? 'Sign in with Solana' : 'Install Solana Wallet'}
               </Button>
             </div>
           </CardContent>
