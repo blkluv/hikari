@@ -8,13 +8,14 @@ import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import { signUp } from '@/utils/auth-helpers/server';
 import { handleRequest } from '@/utils/auth-helpers/client';
-import { signInWithOAuth } from '@/utils/auth-helpers/client';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
+import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
 
 export default function SignUp() {
   const router = useRouter();
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const supabase = createClientComponentClient();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     setIsSubmitting(true);
@@ -22,12 +23,26 @@ export default function SignUp() {
     setIsSubmitting(false);
   };
 
-  const handleOAuthClick = async (provider: 'github' | 'google') => {
+  const handleOAuthSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     setIsSubmitting(true);
     try {
-      await signInWithOAuth(provider);
-    } catch (err) {
-      console.error(err);
+      const formData = new FormData(e.currentTarget);
+      const provider = formData.get('provider') as 'github' | 'google';
+      
+      const { error } = await supabase.auth.signInWithOAuth({
+        provider,
+        options: {
+          redirectTo: `${window.location.origin}/auth/callback`,
+        },
+      });
+      
+      if (error) {
+        alert(error.message);
+        return;
+      }
+    } catch (err: any) {
+      alert(err.message || 'Failed to sign up with OAuth');
     } finally {
       setIsSubmitting(false);
     }
@@ -80,8 +95,8 @@ export default function SignUp() {
                 <Label htmlFor="password">Password</Label>
                 <Input id="password" type="password" name="password" required />
               </div>
-              <Button type="submit" className="w-full" loading={isSubmitting}>
-                Sign up
+              <Button type="submit" className="w-full" disabled={isSubmitting}>
+                {isSubmitting ? 'Signing up...' : 'Sign up'}
               </Button>
             </form>
 
@@ -103,25 +118,31 @@ export default function SignUp() {
 
             {/* OAuth Buttons */}
             <div className="grid gap-2">
-              <Button
-                variant="outline"
-                className="w-full"
-                onClick={() => handleOAuthClick('github')}
-                disabled={isSubmitting}
-              >
-                <GithubIcon className="w-4 h-4 mr-2" />
-                Sign up with GitHub
-              </Button>
+              <form onSubmit={handleOAuthSubmit} className="pb-2">
+                <input type="hidden" name="provider" value="github" />
+                <Button
+                  variant="outline"
+                  type="submit"
+                  className="w-full"
+                  disabled={isSubmitting}
+                >
+                  <GithubIcon className="w-4 h-4 mr-2" />
+                  Sign up with GitHub
+                </Button>
+              </form>
 
-              <Button
-                variant="outline"
-                className="w-full"
-                onClick={() => handleOAuthClick('google')}
-                disabled={isSubmitting}
-              >
-                <ChromeIcon className="w-4 h-4 mr-2" />
-                Sign up with Google
-              </Button>
+              <form onSubmit={handleOAuthSubmit} className="pb-2">
+                <input type="hidden" name="provider" value="google" />
+                <Button
+                  variant="outline"
+                  type="submit"
+                  className="w-full"
+                  disabled={isSubmitting}
+                >
+                  <ChromeIcon className="w-4 h-4 mr-2" />
+                  Sign up with Google
+                </Button>
+              </form>
             </div>
           </CardContent>
         </Card>
