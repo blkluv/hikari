@@ -14,11 +14,22 @@ import { getErrorRedirect } from '@/utils/helpers';
 import { User } from '@supabase/supabase-js';
 import { useRouter, usePathname } from 'next/navigation';
 import { Moon } from 'lucide-react';
-import { Tables } from '@/types/db';
 
 type BillingInterval = 'month' | 'year';
 
-type Price = Tables<'prices'>; // <- exact type server expects
+interface Price {
+  id: string;
+  unit_amount: number;
+  currency: string;
+  interval: BillingInterval;
+  description: string;
+  active: boolean;
+  type: 'recurring' | 'one_time';
+  interval_count: number;
+  metadata: Record<string, any>;
+  product_id: string;
+  trial_period_days: number | null;
+}
 
 interface Product {
   id: string;
@@ -42,28 +53,28 @@ const products: Product[] = [
       {
         id: 'price_tribe_month',
         active: true,
-        currency: 'usd',
-        description: 'Monthly Tribe Tier',
         interval: 'month',
         interval_count: 1,
+        unit_amount: 4400,
+        currency: 'usd',
+        description: 'Monthly Tribe Tier',
         metadata: {},
         product_id: 'prod_Tribe',
         trial_period_days: null,
         type: 'recurring',
-        unit_amount: 4400
       },
       {
         id: 'price_tribe_year',
         active: true,
-        currency: 'usd',
-        description: 'Yearly Tribe Tier',
         interval: 'year',
         interval_count: 1,
+        unit_amount: 44000,
+        currency: 'usd',
+        description: 'Yearly Tribe Tier',
         metadata: {},
         product_id: 'prod_Tribe',
         trial_period_days: null,
         type: 'recurring',
-        unit_amount: 44000
       }
     ],
     perks: [
@@ -82,28 +93,28 @@ const products: Product[] = [
       {
         id: 'price_manifestor_month',
         active: true,
-        currency: 'usd',
-        description: 'Monthly Manifestor Tier',
         interval: 'month',
         interval_count: 1,
+        unit_amount: 14400,
+        currency: 'usd',
+        description: 'Monthly Manifestor Tier',
         metadata: {},
         product_id: 'prod_Manifestor',
         trial_period_days: null,
         type: 'recurring',
-        unit_amount: 14400
       },
       {
         id: 'price_manifestor_year',
         active: true,
-        currency: 'usd',
-        description: 'Yearly Manifestor Tier',
         interval: 'year',
         interval_count: 1,
+        unit_amount: 144000,
+        currency: 'usd',
+        description: 'Yearly Manifestor Tier',
         metadata: {},
         product_id: 'prod_Manifestor',
         trial_period_days: null,
         type: 'recurring',
-        unit_amount: 144000
       }
     ],
     perks: [
@@ -123,28 +134,28 @@ const products: Product[] = [
       {
         id: 'price_ascension_month',
         active: true,
-        currency: 'usd',
-        description: 'Monthly Ascension Tier',
         interval: 'month',
         interval_count: 1,
+        unit_amount: 44400,
+        currency: 'usd',
+        description: 'Monthly Ascension Tier',
         metadata: {},
         product_id: 'prod_Ascension',
         trial_period_days: null,
         type: 'recurring',
-        unit_amount: 44400
       },
       {
         id: 'price_ascension_year',
         active: true,
-        currency: 'usd',
-        description: 'Yearly Ascension Tier',
         interval: 'year',
         interval_count: 1,
+        unit_amount: 444000,
+        currency: 'usd',
+        description: 'Yearly Ascension Tier',
         metadata: {},
         product_id: 'prod_Ascension',
         trial_period_days: null,
         type: 'recurring',
-        unit_amount: 444000
       }
     ],
     perks: [
@@ -233,9 +244,9 @@ export default function PricingRounded({ user, subscription }: Props) {
 
             const priceString = new Intl.NumberFormat('en-US', {
               style: 'currency',
-              currency: price.currency!,
+              currency: price.currency,
               minimumFractionDigits: 0
-            }).format(price.unit_amount! / 100);
+            }).format(price.unit_amount / 100);
 
             return (
               <Card key={product.id} className="w-full max-w-sm text-black bg-white border-2 rounded-4xl">
