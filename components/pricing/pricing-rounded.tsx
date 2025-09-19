@@ -8,7 +8,7 @@ import {
   CardTitle,
   CardContent
 } from '@/components/ui/card-header';
-import { useRouter } from 'next/navigation';
+import { useRouter, usePathname } from 'next/navigation';
 import { Moon } from 'lucide-react';
 
 type BillingInterval = 'month' | 'year';
@@ -17,13 +17,17 @@ interface Product {
   id: string;
   name: string;
   description: string;
-  prices: Record<BillingInterval, { amount: number; stripeUrl: string }>;
+  prices: {
+    interval: BillingInterval;
+    amount: number; // in cents
+    stripeUrl: string;
+  }[];
   perks: string[];
 }
 
 interface Props {
-  user: any;
-  subscription: any;
+  user?: any;
+  subscription?: any;
 }
 
 const products: Product[] = [
@@ -31,80 +35,62 @@ const products: Product[] = [
     id: 'prod_Tribe',
     name: 'Tribe Tier',
     description: 'Perfect for those starting their journey in the purpose economy.',
-    prices: {
-      month: {
-        amount: 44,
-        stripeUrl: 'https://buy.stripe.com/28E5kDd57aP4gFhbDr5wI0Z'
-      },
-      year: {
-        amount: 440,
-        stripeUrl: 'https://buy.stripe.com/00w7sL7KN8GW60D5f35wI10'
-      }
-    },
+    prices: [
+      { interval: 'month', amount: 4400, stripeUrl: 'https://buy.stripe.com/28E5kDd57aP4gFhbDr5wI0Z' },
+      { interval: 'year', amount: 44000, stripeUrl: 'https://buy.stripe.com/00w7sL7KN8GW60D5f35wI10' }
+    ],
     perks: [
-      'Daily Huddles (15-min livestream pep talks)',
-      'Access to weekly livestream classes + replays',
-      'Private community chat + mastermind tribe',
-      'Earn tribe memecoins for showing up & participating',
-      'Unlock tokenized rewards for engagement'
+      '🎥 Daily Huddles (15-min livestream pep talks)',
+      '📚 Access to weekly livestream classes + replays',
+      '💬 Access to a private Tribe Telegram group',
+      '💰 Earn tribe memecoins for showing up & participating',
+      '🏆 Unlock tokenized rewards for engagement'
     ]
   },
   {
     id: 'prod_Manifestor',
     name: 'Manifestor Tier',
     description: 'Best for those ready to level up spiritually & financially with group support.',
-    prices: {
-      month: {
-        amount: 144,
-        stripeUrl: 'https://buy.stripe.com/bJe7sL5CF0aq0Gj22R5wI11'
-      },
-      year: {
-        amount: 1440,
-        stripeUrl: 'https://buy.stripe.com/8x2aEX9SVbT81KndLz5wI12'
-      }
-    },
+    prices: [
+      { interval: 'month', amount: 14400, stripeUrl: 'https://buy.stripe.com/bJe7sL5CF0aq0Gj22R5wI11' },
+      { interval: 'year', amount: 144000, stripeUrl: 'https://buy.stripe.com/8x2aEX9SVbT81KndLz5wI12' }
+    ],
     perks: [
-      'Everything in Tribe Tier',
-      '2x Weekly Group Spiritual Coaching Sessions (live Q&A + feedback)',
-      'Boosted tribe memecoin rewards (higher earning multipliers)',
-      'Access to resource vault (guides, meditations, crypto insights)',
-      'Monthly NFT/Token drops as proof of participation',
-      'Network in the manifested mastermind of leaders & visionaries'
+      '✅ Everything in Tribe Tier',
+      '🧘 2x Weekly Group Spiritual Coaching Sessions (live Q&A + feedback)',
+      '💹 Boosted tribe memecoin rewards (higher earning multipliers)',
+      '📂 Access to resource vault (guides, meditations, crypto insights)',
+      '🎁 Monthly NFT/Token drops as proof of participation',
+      '💬 Access to a private Manifestor Telegram group'
     ]
   },
   {
     id: 'prod_Ascension',
     name: 'Ascension Tier',
     description: 'For serious seekers, creators, and leaders who want direct access.',
-    prices: {
-      month: {
-        amount: 444,
-        stripeUrl: 'https://buy.stripe.com/9B6bJ18ORg9o2Or4aZ5wI0X'
-      },
-      year: {
-        amount: 4440,
-        stripeUrl: 'https://buy.stripe.com/5kQ7sLd577CSbkX22R5wI0Y'
-      }
-    },
+    prices: [
+      { interval: 'month', amount: 44400, stripeUrl: 'https://buy.stripe.com/9B6bJ18ORg9o2Or4aZ5wI0X' },
+      { interval: 'year', amount: 444000, stripeUrl: 'https://buy.stripe.com/5kQ7sLd577CSbkX22R5wI0Y' }
+    ],
     perks: [
-      'Everything in Manifestor Tier',
-      '1-on-1 Spiritual Coaching (monthly private session with Hahz)',
-      'Priority spotlight coaching during livestreams',
-      'Exclusive VIP Memecoin Airdrops + tokenized recognition',
-      'Access to special IRL meetups / retreats (discounted or free)',
-      'Become part of the core inner circle co-creating the Web5 Purpose Economy'
+      '✅ Everything in Manifestor Tier',
+      '🧘 1-on-1 Spiritual Coaching (monthly private session with Hahz)',
+      '🎤 Priority spotlight coaching during livestreams',
+      '🎁 Exclusive VIP Memecoin Airdrops + tokenized recognition',
+      '🌐 Access to special IRL meetups / retreats (discounted or free)',
+      '💬 Access to a private Ascension Telegram group'
     ]
   }
 ];
 
 export default function PricingRounded({ user, subscription }: Props) {
-  const [billingInterval, setBillingInterval] = useState<BillingInterval>('month');
-  const [loadingId, setLoadingId] = useState<string>();
   const router = useRouter();
+  const [billingInterval, setBillingInterval] = useState<BillingInterval>('month');
+  const [loading, setLoading] = useState<string | null>(null);
 
-  const handleSubscribe = (url: string, id: string) => {
-    setLoadingId(id);
-    window.location.href = url;
+  const handleStripeCheckout = (stripeUrl: string, productId: string) => {
+    setLoading(productId);
+    window.location.href = stripeUrl;
   };
 
   return (
@@ -134,12 +120,14 @@ export default function PricingRounded({ user, subscription }: Props) {
 
         <div className="grid gap-6 mt-10 md:grid-cols-3">
           {products.map((product) => {
-            const price = product.prices[billingInterval];
+            const price = product.prices.find(p => p.interval === billingInterval);
+            if (!price) return null;
+
             const priceString = new Intl.NumberFormat('en-US', {
               style: 'currency',
               currency: 'USD',
-              minimumFractionDigits: 2
-            }).format(price.amount);
+              minimumFractionDigits: 0
+            }).format(price.amount / 100);
 
             return (
               <Card key={product.id} className="w-full max-w-sm text-black bg-white border-2 rounded-4xl">
@@ -155,17 +143,17 @@ export default function PricingRounded({ user, subscription }: Props) {
                   <Button
                     variant="default"
                     type="button"
-                    onClick={() => handleSubscribe(price.stripeUrl, product.id)}
-                    disabled={loadingId === product.id}
+                    onClick={() => handleStripeCheckout(price.stripeUrl, product.id)}
+                    disabled={loading === product.id}
                     className="w-full mt-4 rounded-4xl"
                   >
-                    Subscribe
+                    {loading === product.id ? 'Redirecting...' : 'Subscribe'}
                   </Button>
                   <ul className="mt-4 space-y-2">
                     {product.perks.map((perk, idx) => (
                       <li key={idx} className="flex items-center space-x-2">
-                        <CheckIcon className="text-blue-500" />
-                        <span>{perk}</span>
+                        <span className="text-blue-500">{perk.split(' ')[0]}</span>
+                        <span>{perk.replace(perk.split(' ')[0], '')}</span>
                       </li>
                     ))}
                   </ul>
@@ -176,24 +164,5 @@ export default function PricingRounded({ user, subscription }: Props) {
         </div>
       </div>
     </section>
-  );
-}
-
-function CheckIcon(props: any) {
-  return (
-    <svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="M20 6 9 17l-5-5" />
-    </svg>
   );
 }
