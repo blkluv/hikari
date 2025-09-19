@@ -17,11 +17,19 @@ import { Moon } from 'lucide-react';
 
 type BillingInterval = 'lifetime' | 'year' | 'month';
 
+// Update the Price interface to match what checkoutWithStripe expects
 interface Price {
   id: string;
-  interval: 'month' | 'year';
-  unit_amount: number;
+  active: boolean;
   currency: string;
+  description: string | null;
+  interval: 'month' | 'year' | 'day' | 'week' | null;
+  interval_count: number | null;
+  metadata: any; // Json type from Supabase
+  product_id: string | null;
+  trial_period_days: number | null;
+  type: 'one_time' | 'recurring' | null;
+  unit_amount: number | null;
 }
 
 interface Product {
@@ -36,7 +44,7 @@ interface Props {
   subscription: any; // can refine later if needed
 }
 
-// Hard-coded Stripe products + prices
+// Hard-coded Stripe products + prices with the correct structure
 const products: Product[] = [
   {
     id: 'prod_T4r49Ay2aJopUV',
@@ -45,15 +53,29 @@ const products: Product[] = [
     prices: [
       {
         id: 'price_1S8hMVEC5zyE604bRsfskiG2',
+        active: true,
         interval: 'month',
         unit_amount: 4400,
-        currency: 'usd'
+        currency: 'usd',
+        description: 'Monthly Starter plan',
+        interval_count: 1,
+        metadata: {},
+        product_id: 'prod_T4r49Ay2aJopUV',
+        trial_period_days: null,
+        type: 'recurring'
       },
       {
         id: 'price_1S8hN4EC5zyE604bH4f5cLDy',
+        active: true,
         interval: 'year',
         unit_amount: 44000,
-        currency: 'usd'
+        currency: 'usd',
+        description: 'Yearly Starter plan',
+        interval_count: 1,
+        metadata: {},
+        product_id: 'prod_T4r49Ay2aJopUV',
+        trial_period_days: null,
+        type: 'recurring'
       }
     ]
   },
@@ -64,15 +86,29 @@ const products: Product[] = [
     prices: [
       {
         id: 'price_1S8hRgEC5zyE604bKgn6mu3Q',
+        active: true,
         interval: 'month',
         unit_amount: 14400,
-        currency: 'usd'
+        currency: 'usd',
+        description: 'Monthly Pro plan',
+        interval_count: 1,
+        metadata: {},
+        product_id: 'prod_T4r9ZgRmGrjArM',
+        trial_period_days: null,
+        type: 'recurring'
       },
       {
         id: 'price_1S8hRgEC5zyE604bjs8GRHZe',
+        active: true,
         interval: 'year',
         unit_amount: 144000,
-        currency: 'usd'
+        currency: 'usd',
+        description: 'Yearly Pro plan',
+        interval_count: 1,
+        metadata: {},
+        product_id: 'prod_T4r9ZgRmGrjArM',
+        trial_period_days: null,
+        type: 'recurring'
       }
     ]
   },
@@ -83,15 +119,29 @@ const products: Product[] = [
     prices: [
       {
         id: 'price_1S8hTbEC5zyE604b5uBWnTjd',
+        active: true,
         interval: 'month',
         unit_amount: 44400,
-        currency: 'usd'
+        currency: 'usd',
+        description: 'Monthly Enterprise plan',
+        interval_count: 1,
+        metadata: {},
+        product_id: 'prod_T4rBelLltR2W2f',
+        trial_period_days: null,
+        type: 'recurring'
       },
       {
         id: 'price_1S8hcfEC5zyE604b0ASwjQub',
+        active: true,
         interval: 'year',
         unit_amount: 444000,
-        currency: 'usd'
+        currency: 'usd',
+        description: 'Yearly Enterprise plan',
+        interval_count: 1,
+        metadata: {},
+        product_id: 'prod_T4rBelLltR2W2f',
+        trial_period_days: null,
+        type: 'recurring'
       }
     ]
   }
@@ -185,7 +235,7 @@ export default function PricingRounded({ user, subscription }: Props) {
               style: 'currency',
               currency: price.currency,
               minimumFractionDigits: 0
-            }).format(price.unit_amount / 100);
+            }).format((price.unit_amount || 0) / 100);
 
             const isActive = subscription
               ? product.name === subscription?.prices?.products?.name
