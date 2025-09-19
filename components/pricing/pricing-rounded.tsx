@@ -44,8 +44,32 @@ const products: Product[] = [
     name: 'Tribe Tier',
     description: 'Perfect for those starting their journey in the purpose economy.',
     prices: [
-      { id: 'price_tribe_month', unit_amount: 4400, currency: 'usd', interval: 'month', description: 'Monthly Tribe Tier' },
-      { id: 'price_tribe_year', unit_amount: 44000, currency: 'usd', interval: 'year', description: 'Yearly Tribe Tier' }
+      {
+        id: 'price_tribe_month',
+        active: true,
+        interval: 'month',
+        interval_count: 1,
+        unit_amount: 4400,
+        currency: 'usd',
+        description: 'Monthly Tribe Tier',
+        metadata: {},
+        product_id: 'prod_Tribe',
+        trial_period_days: null,
+        type: 'recurring',
+      },
+      {
+        id: 'price_tribe_year',
+        active: true,
+        interval: 'year',
+        interval_count: 1,
+        unit_amount: 44000,
+        currency: 'usd',
+        description: 'Yearly Tribe Tier',
+        metadata: {},
+        product_id: 'prod_Tribe',
+        trial_period_days: null,
+        type: 'recurring',
+      }
     ],
     perks: [
       'Daily Huddles (15-min livestream pep talks)',
@@ -60,8 +84,32 @@ const products: Product[] = [
     name: 'Manifestor Tier',
     description: 'Best for those ready to level up spiritually & financially with group support.',
     prices: [
-      { id: 'price_manifestor_month', unit_amount: 14400, currency: 'usd', interval: 'month', description: 'Monthly Manifestor Tier' },
-      { id: 'price_manifestor_year', unit_amount: 144000, currency: 'usd', interval: 'year', description: 'Yearly Manifestor Tier' }
+      {
+        id: 'price_manifestor_month',
+        active: true,
+        interval: 'month',
+        interval_count: 1,
+        unit_amount: 14400,
+        currency: 'usd',
+        description: 'Monthly Manifestor Tier',
+        metadata: {},
+        product_id: 'prod_Manifestor',
+        trial_period_days: null,
+        type: 'recurring',
+      },
+      {
+        id: 'price_manifestor_year',
+        active: true,
+        interval: 'year',
+        interval_count: 1,
+        unit_amount: 144000,
+        currency: 'usd',
+        description: 'Yearly Manifestor Tier',
+        metadata: {},
+        product_id: 'prod_Manifestor',
+        trial_period_days: null,
+        type: 'recurring',
+      }
     ],
     perks: [
       'Everything in Tribe Tier',
@@ -77,8 +125,32 @@ const products: Product[] = [
     name: 'Ascension Tier',
     description: 'For serious seekers, creators, and leaders who want direct access.',
     prices: [
-      { id: 'price_ascension_month', unit_amount: 44400, currency: 'usd', interval: 'month', description: 'Monthly Ascension Tier' },
-      { id: 'price_ascension_year', unit_amount: 444000, currency: 'usd', interval: 'year', description: 'Yearly Ascension Tier' }
+      {
+        id: 'price_ascension_month',
+        active: true,
+        interval: 'month',
+        interval_count: 1,
+        unit_amount: 44400,
+        currency: 'usd',
+        description: 'Monthly Ascension Tier',
+        metadata: {},
+        product_id: 'prod_Ascension',
+        trial_period_days: null,
+        type: 'recurring',
+      },
+      {
+        id: 'price_ascension_year',
+        active: true,
+        interval: 'year',
+        interval_count: 1,
+        unit_amount: 444000,
+        currency: 'usd',
+        description: 'Yearly Ascension Tier',
+        metadata: {},
+        product_id: 'prod_Ascension',
+        trial_period_days: null,
+        type: 'recurring',
+      }
     ],
     perks: [
       'Everything in Manifestor Tier',
@@ -90,6 +162,7 @@ const products: Product[] = [
     ]
   }
 ];
+
 
 export default function PricingRounded({ user, subscription }: Props) {
   const router = useRouter();
