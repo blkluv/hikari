@@ -2,12 +2,7 @@
 
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
-import {
-  Card,
-  CardHeader,
-  CardTitle,
-  CardContent
-} from '@/components/ui/card-header';
+import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card-header';
 import { getStripe } from '@/utils/stripe/client';
 import { checkoutWithStripe } from '@/utils/stripe/server';
 import { getErrorRedirect } from '@/utils/helpers';
@@ -22,7 +17,12 @@ interface Price {
   unit_amount: number;
   currency: string;
   interval: BillingInterval;
-  description: string;
+  interval_count: number | null;
+  description: string | null;
+  metadata: Record<string, any>;
+  product_id: string;
+  trial_period_days: number | null;
+  type: 'recurring' | 'one_time';
 }
 
 interface Product {
@@ -38,6 +38,7 @@ interface Props {
   subscription: any;
 }
 
+// --- PRODUCTS ---
 const products: Product[] = [
   {
     id: 'prod_Tribe',
@@ -46,29 +47,27 @@ const products: Product[] = [
     prices: [
       {
         id: 'price_tribe_month',
-        active: true,
-        interval: 'month',
-        interval_count: 1,
         unit_amount: 4400,
         currency: 'usd',
+        interval: 'month',
+        interval_count: 1,
         description: 'Monthly Tribe Tier',
         metadata: {},
         product_id: 'prod_Tribe',
         trial_period_days: null,
-        type: 'recurring',
+        type: 'recurring'
       },
       {
         id: 'price_tribe_year',
-        active: true,
-        interval: 'year',
-        interval_count: 1,
         unit_amount: 44000,
         currency: 'usd',
+        interval: 'year',
+        interval_count: 1,
         description: 'Yearly Tribe Tier',
         metadata: {},
         product_id: 'prod_Tribe',
         trial_period_days: null,
-        type: 'recurring',
+        type: 'recurring'
       }
     ],
     perks: [
@@ -86,29 +85,27 @@ const products: Product[] = [
     prices: [
       {
         id: 'price_manifestor_month',
-        active: true,
-        interval: 'month',
-        interval_count: 1,
         unit_amount: 14400,
         currency: 'usd',
+        interval: 'month',
+        interval_count: 1,
         description: 'Monthly Manifestor Tier',
         metadata: {},
         product_id: 'prod_Manifestor',
         trial_period_days: null,
-        type: 'recurring',
+        type: 'recurring'
       },
       {
         id: 'price_manifestor_year',
-        active: true,
-        interval: 'year',
-        interval_count: 1,
         unit_amount: 144000,
         currency: 'usd',
+        interval: 'year',
+        interval_count: 1,
         description: 'Yearly Manifestor Tier',
         metadata: {},
         product_id: 'prod_Manifestor',
         trial_period_days: null,
-        type: 'recurring',
+        type: 'recurring'
       }
     ],
     perks: [
@@ -127,29 +124,27 @@ const products: Product[] = [
     prices: [
       {
         id: 'price_ascension_month',
-        active: true,
-        interval: 'month',
-        interval_count: 1,
         unit_amount: 44400,
         currency: 'usd',
+        interval: 'month',
+        interval_count: 1,
         description: 'Monthly Ascension Tier',
         metadata: {},
         product_id: 'prod_Ascension',
         trial_period_days: null,
-        type: 'recurring',
+        type: 'recurring'
       },
       {
         id: 'price_ascension_year',
-        active: true,
-        interval: 'year',
-        interval_count: 1,
         unit_amount: 444000,
         currency: 'usd',
+        interval: 'year',
+        interval_count: 1,
         description: 'Yearly Ascension Tier',
         metadata: {},
         product_id: 'prod_Ascension',
         trial_period_days: null,
-        type: 'recurring',
+        type: 'recurring'
       }
     ],
     perks: [
@@ -163,7 +158,7 @@ const products: Product[] = [
   }
 ];
 
-
+// --- COMPONENT ---
 export default function PricingRounded({ user, subscription }: Props) {
   const router = useRouter();
   const currentPath = usePathname();
