@@ -18,7 +18,6 @@ export default async function PricingPage() {
   return (
     <PricingRounded
       user={user}
-      products={products ?? []}
       subscription={subscription}
     />
   );
