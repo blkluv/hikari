@@ -8,209 +8,228 @@ import {
   CardTitle,
   CardContent
 } from '@/components/ui/card-header';
-import type { Tables } from '@/types/db';
 import { getStripe } from '@/utils/stripe/client';
 import { checkoutWithStripe } from '@/utils/stripe/server';
 import { getErrorRedirect } from '@/utils/helpers';
 import { User } from '@supabase/supabase-js';
 import { useRouter, usePathname } from 'next/navigation';
 import { Moon } from 'lucide-react';
-import pricingPlans from '@/config/pricing';
-import { dummyPricing } from '@/config/pricing';
 
-type Subscription = Tables<'subscriptions'>;
-type Product = Tables<'products'>;
-type Price = Tables<'prices'>;
-interface ProductWithPrices extends Product {
+type BillingInterval = 'lifetime' | 'year' | 'month';
+
+interface Price {
+  id: string;
+  interval: 'month' | 'year';
+  unit_amount: number;
+  currency: string;
+}
+
+interface Product {
+  id: string;
+  name: string;
+  description: string;
   prices: Price[];
-}
-interface PriceWithProduct extends Price {
-  products: Product | null;
-}
-interface SubscriptionWithProduct extends Subscription {
-  prices: PriceWithProduct | null;
 }
 
 interface Props {
   user: User | null | undefined;
-  products: ProductWithPrices[];
-  subscription: SubscriptionWithProduct | null;
+  subscription: any; // can refine later if needed
 }
 
-type BillingInterval = 'lifetime' | 'year' | 'month';
+// Hard-coded Stripe products + prices
+const products: Product[] = [
+  {
+    id: 'prod_T4r49Ay2aJopUV',
+    name: 'Starter',
+    description: 'For individuals starting out',
+    prices: [
+      {
+        id: 'price_1S8hMVEC5zyE604bRsfskiG2',
+        interval: 'month',
+        unit_amount: 4400,
+        currency: 'usd'
+      },
+      {
+        id: 'price_1S8hN4EC5zyE604bH4f5cLDy',
+        interval: 'year',
+        unit_amount: 44000,
+        currency: 'usd'
+      }
+    ]
+  },
+  {
+    id: 'prod_T4r9ZgRmGrjArM',
+    name: 'Pro',
+    description: 'For growing teams',
+    prices: [
+      {
+        id: 'price_1S8hRgEC5zyE604bKgn6mu3Q',
+        interval: 'month',
+        unit_amount: 14400,
+        currency: 'usd'
+      },
+      {
+        id: 'price_1S8hRgEC5zyE604bjs8GRHZe',
+        interval: 'year',
+        unit_amount: 144000,
+        currency: 'usd'
+      }
+    ]
+  },
+  {
+    id: 'prod_T4rBelLltR2W2f',
+    name: 'Enterprise',
+    description: 'For businesses at scale',
+    prices: [
+      {
+        id: 'price_1S8hTbEC5zyE604b5uBWnTjd',
+        interval: 'month',
+        unit_amount: 44400,
+        currency: 'usd'
+      },
+      {
+        id: 'price_1S8hcfEC5zyE604b0ASwjQub',
+        interval: 'year',
+        unit_amount: 444000,
+        currency: 'usd'
+      }
+    ]
+  }
+];
 
-export default function PricingRounded({
-  user,
-  products,
-  subscription
-}: Props) {
-  const intervals = Array.from(
-    new Set(
-      products.flatMap((product) =>
-        product?.prices?.map((price) => price?.interval)
-      )
-    )
-  );
+export default function PricingRounded({ user, subscription }: Props) {
   const router = useRouter();
+  const currentPath = usePathname();
   const [billingInterval, setBillingInterval] =
     useState<BillingInterval>('month');
   const [priceIdLoading, setPriceIdLoading] = useState<string>();
-  const currentPath = usePathname();
 
   const handleStripeCheckout = async (price: Price) => {
-    setPriceIdLoading(price.id);
+    try {
+      setPriceIdLoading(price.id);
 
-    if (!user) {
-      setPriceIdLoading(undefined);
-      return router.push('/signup');
-    }
+      if (!user) {
+        router.push('/signup');
+        return;
+      }
 
-    const { errorRedirect, sessionId } = await checkoutWithStripe(
-      price,
-      currentPath
-    );
+      const { errorRedirect, sessionId } = await checkoutWithStripe(
+        price,
+        currentPath
+      );
 
-    if (errorRedirect) {
-      setPriceIdLoading(undefined);
-      return router.push(errorRedirect);
-    }
+      if (errorRedirect) {
+        router.push(errorRedirect);
+        return;
+      }
 
-    if (!sessionId) {
-      setPriceIdLoading(undefined);
-      return router.push(
+      if (!sessionId) {
+        throw new Error('Stripe sessionId missing.');
+      }
+
+      const stripe = await getStripe();
+      if (!stripe) throw new Error('Stripe failed to load.');
+
+      const { error } = await stripe.redirectToCheckout({ sessionId });
+      if (error) throw error;
+    } catch (err: any) {
+      console.error('Checkout error:', err);
+      router.push(
         getErrorRedirect(
           currentPath,
-          'An unknown error occurred.',
-          'Please try again later or contact a system administrator.'
+          'Checkout failed',
+          err.message || 'Please try again later.'
         )
       );
+    } finally {
+      setPriceIdLoading(undefined);
     }
-
-    const stripe = await getStripe();
-    stripe?.redirectToCheckout({ sessionId });
-
-    setPriceIdLoading(undefined);
   };
 
-  const displayProducts = products.length ? products : dummyPricing;
+  return (
+    <section className="container mx-auto" id="pricing">
+      <div className="flex flex-col items-center justify-center w-full min-h-screen py-10">
+        <h1 className="text-3xl font-bold text-center">
+          Flat pricing, no management fees.
+        </h1>
+        <p className="mt-2 text-center text-muted-foreground">
+          Whether you're one person trying to get ahead or a big firm trying
+          to take over the world, we've got a plan for you.
+        </p>
 
-  if (!displayProducts.length) {
-    return (
-      <section className="container mx-auto" id="pricing">
-        <div className="max-w-6xl px-4 py-8 mx-auto sm:py-24 sm:px-6 lg:px-8">
-          <div className="sm:flex sm:flex-col sm:align-center"></div>
-          <p className="text-4xl font-extrabold text-white sm:text-center sm:text-6xl">
-            No subscription pricing plans found. Create them in your{' '}
-            <a
-              className="text-pink-500 underline"
-              href="https://dashboard.stripe.com/products"
-              rel="noopener noreferrer"
-              target="_blank"
-            >
-              Stripe Dashboard
-            </a>
-            .
-          </p>
+        <div className="flex items-center justify-center mt-6 space-x-4">
+          <Button
+            className="rounded-4xl"
+            variant={billingInterval === 'month' ? 'default' : 'outline'}
+            onClick={() => setBillingInterval('month')}
+          >
+            Monthly
+          </Button>
+          <Button
+            className="rounded-4xl"
+            variant={billingInterval === 'year' ? 'default' : 'outline'}
+            onClick={() => setBillingInterval('year')}
+          >
+            Yearly
+          </Button>
         </div>
-      </section>
-    );
-  } else {
-    return (
-      <section className="container mx-auto" id="pricing">
-        <div className="flex flex-col items-center justify-center w-full min-h-screen py-10 ">
-          <h1 className="text-3xl font-bold text-center">
-            Flat pricing, no management fees.
-          </h1>
-          <p className="mt-2 text-center text-muted-foreground">
-            Whether you're one person trying to get ahead or a big firm trying
-            to take over the world, we've got a plan for you.
-          </p>
-          {displayProducts.length === 0 && (
-            <p className="mt-4 text-center text-red-500">
-              Note: This is dummy pricing data. Please add your own pricing data in the Stripe Dashboard to see actual plans. Alternatively, you may use the Stripe Fixtures command to create your own pricing data, see <a href="https://hahz.live/docs/configure/stripe/local" className="underline" target="_blank" rel="noopener noreferrer">documentation</a>.
-            </p>
-          )}
-          <div className="flex items-center justify-center mt-6 space-x-4">
-            <Button
-              className="rounded-4xl"
-              variant={billingInterval === 'month' ? 'default' : 'outline'}
-              onClick={() => setBillingInterval('month')}
-            >
-              Monthly
-            </Button>
-            <Button
-              className="rounded-4xl"
-              variant={billingInterval === 'year' ? 'default' : 'outline'}
-              onClick={() => setBillingInterval('year')}
-            >
-              Yearly
-            </Button>
-          </div>
-          <div className="grid gap-6 mt-10 md:grid-cols-3">
-            {displayProducts.map((product) => {
-              const price = product?.prices?.find(
-                (price) => price.interval === billingInterval
-              );
-              if (!price) return null;
-              const priceString = new Intl.NumberFormat('en-US', {
-                style: 'currency',
-                currency: price.currency!,
-                minimumFractionDigits: 0
-              }).format((price?.unit_amount || 0) / 100);
-              const isActive = subscription
-                ? product.name === subscription?.prices?.products?.name
-                : false;
-              const cardBgColor = isActive
-                ? 'border-black bg-white text-black'
-                : 'bg-white text-black';
 
-              // Use features from the pricingPlans config
-              const plan = pricingPlans.find(
-                (plan) => plan.name === product.name
-              );
-              const features = plan ? plan.features : [];
+        <div className="grid gap-6 mt-10 md:grid-cols-3">
+          {products.map((product) => {
+            const price = product.prices.find(
+              (p) => p.interval === billingInterval
+            );
+            if (!price) return null;
 
-              return (
-                <Card
-                  key={product.id}
-                  className={`w-full max-w-sm rounded-4xl border-2 ${cardBgColor}`}
-                >
-                  <CardHeader className="flex flex-col justify-center rounded-t-4xl">
-                    <div className="flex items-center">
-                      <Moon className="w-8 h-8 text-gray-600 fill-zinc-500" />
-                      <CardTitle className="ml-2 text-2xl font-bold">{product.name}</CardTitle>
-                    </div>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="py-8 text-4xl font-bold">{priceString}</div>
-                    <p className="mt-2 text-muted-foreground">
-                      {product.description}
-                    </p>
-                    <Button
-                      variant="default"
-                      type="button"
-                      onClick={() => handleStripeCheckout(price)}
-                      className="w-full mt-4 rounded-4xl"
-                    >
-                      {subscription ? 'Manage' : 'Subscribe'}
-                    </Button>
-                    <ul className="mt-4 space-y-2">
-                      {features.map((feature, index) => (
-                        <li key={index} className="flex items-center space-x-2">
-                          <CheckIcon className="text-blue-500" />
-                          <span>{feature.trim()}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </CardContent>
-                </Card>
-              );
-            })}
-          </div>
+            const priceString = new Intl.NumberFormat('en-US', {
+              style: 'currency',
+              currency: price.currency,
+              minimumFractionDigits: 0
+            }).format(price.unit_amount / 100);
+
+            const isActive = subscription
+              ? product.name === subscription?.prices?.products?.name
+              : false;
+
+            const cardBgColor = isActive
+              ? 'border-black bg-white text-black'
+              : 'bg-white text-black';
+
+            return (
+              <Card
+                key={product.id}
+                className={`w-full max-w-sm rounded-4xl border-2 ${cardBgColor}`}
+              >
+                <CardHeader className="flex flex-col justify-center rounded-t-4xl">
+                  <div className="flex items-center">
+                    <Moon className="w-8 h-8 text-gray-600 fill-zinc-500" />
+                    <CardTitle className="ml-2 text-2xl font-bold">
+                      {product.name}
+                    </CardTitle>
+                  </div>
+                </CardHeader>
+                <CardContent>
+                  <div className="py-8 text-4xl font-bold">{priceString}</div>
+                  <p className="mt-2 text-muted-foreground">
+                    {product.description}
+                  </p>
+                  <Button
+                    variant="default"
+                    type="button"
+                    onClick={() => handleStripeCheckout(price)}
+                    disabled={priceIdLoading === price.id}
+                    className="w-full mt-4 rounded-4xl"
+                  >
+                    {subscription ? 'Manage' : 'Subscribe'}
+                  </Button>
+                </CardContent>
+              </Card>
+            );
+          })}
         </div>
-      </section>
-    );
-  }
+      </div>
+    </section>
+  );
 }
 
 function CheckIcon(props: any) {
