@@ -2,28 +2,23 @@
 
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card-header';
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardContent
+} from '@/components/ui/card-header';
 import { getStripe } from '@/utils/stripe/client';
 import { checkoutWithStripe } from '@/utils/stripe/server';
 import { getErrorRedirect } from '@/utils/helpers';
 import { User } from '@supabase/supabase-js';
 import { useRouter, usePathname } from 'next/navigation';
 import { Moon } from 'lucide-react';
+import { Tables } from '@/types/db';
 
 type BillingInterval = 'month' | 'year';
 
-interface Price {
-  id: string;
-  unit_amount: number;
-  currency: string;
-  interval: BillingInterval;
-  interval_count: number | null;
-  description: string | null;
-  metadata: Record<string, any>;
-  product_id: string;
-  trial_period_days: number | null;
-  type: 'recurring' | 'one_time';
-}
+type Price = Tables<'prices'>; // <- exact type server expects
 
 interface Product {
   id: string;
@@ -38,7 +33,6 @@ interface Props {
   subscription: any;
 }
 
-// --- PRODUCTS ---
 const products: Product[] = [
   {
     id: 'prod_Tribe',
@@ -47,27 +41,29 @@ const products: Product[] = [
     prices: [
       {
         id: 'price_tribe_month',
-        unit_amount: 4400,
+        active: true,
         currency: 'usd',
+        description: 'Monthly Tribe Tier',
         interval: 'month',
         interval_count: 1,
-        description: 'Monthly Tribe Tier',
         metadata: {},
         product_id: 'prod_Tribe',
         trial_period_days: null,
-        type: 'recurring'
+        type: 'recurring',
+        unit_amount: 4400
       },
       {
         id: 'price_tribe_year',
-        unit_amount: 44000,
+        active: true,
         currency: 'usd',
+        description: 'Yearly Tribe Tier',
         interval: 'year',
         interval_count: 1,
-        description: 'Yearly Tribe Tier',
         metadata: {},
         product_id: 'prod_Tribe',
         trial_period_days: null,
-        type: 'recurring'
+        type: 'recurring',
+        unit_amount: 44000
       }
     ],
     perks: [
@@ -85,27 +81,29 @@ const products: Product[] = [
     prices: [
       {
         id: 'price_manifestor_month',
-        unit_amount: 14400,
+        active: true,
         currency: 'usd',
+        description: 'Monthly Manifestor Tier',
         interval: 'month',
         interval_count: 1,
-        description: 'Monthly Manifestor Tier',
         metadata: {},
         product_id: 'prod_Manifestor',
         trial_period_days: null,
-        type: 'recurring'
+        type: 'recurring',
+        unit_amount: 14400
       },
       {
         id: 'price_manifestor_year',
-        unit_amount: 144000,
+        active: true,
         currency: 'usd',
+        description: 'Yearly Manifestor Tier',
         interval: 'year',
         interval_count: 1,
-        description: 'Yearly Manifestor Tier',
         metadata: {},
         product_id: 'prod_Manifestor',
         trial_period_days: null,
-        type: 'recurring'
+        type: 'recurring',
+        unit_amount: 144000
       }
     ],
     perks: [
@@ -124,27 +122,29 @@ const products: Product[] = [
     prices: [
       {
         id: 'price_ascension_month',
-        unit_amount: 44400,
+        active: true,
         currency: 'usd',
+        description: 'Monthly Ascension Tier',
         interval: 'month',
         interval_count: 1,
-        description: 'Monthly Ascension Tier',
         metadata: {},
         product_id: 'prod_Ascension',
         trial_period_days: null,
-        type: 'recurring'
+        type: 'recurring',
+        unit_amount: 44400
       },
       {
         id: 'price_ascension_year',
-        unit_amount: 444000,
+        active: true,
         currency: 'usd',
+        description: 'Yearly Ascension Tier',
         interval: 'year',
         interval_count: 1,
-        description: 'Yearly Ascension Tier',
         metadata: {},
         product_id: 'prod_Ascension',
         trial_period_days: null,
-        type: 'recurring'
+        type: 'recurring',
+        unit_amount: 444000
       }
     ],
     perks: [
@@ -158,7 +158,6 @@ const products: Product[] = [
   }
 ];
 
-// --- COMPONENT ---
 export default function PricingRounded({ user, subscription }: Props) {
   const router = useRouter();
   const currentPath = usePathname();
@@ -234,9 +233,9 @@ export default function PricingRounded({ user, subscription }: Props) {
 
             const priceString = new Intl.NumberFormat('en-US', {
               style: 'currency',
-              currency: price.currency,
+              currency: price.currency!,
               minimumFractionDigits: 0
-            }).format(price.unit_amount / 100);
+            }).format(price.unit_amount! / 100);
 
             return (
               <Card key={product.id} className="w-full max-w-sm text-black bg-white border-2 rounded-4xl">
