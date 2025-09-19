@@ -8,39 +8,21 @@ import {
   CardTitle,
   CardContent
 } from '@/components/ui/card-header';
-import { getStripe } from '@/utils/stripe/client';
-import { checkoutWithStripe } from '@/utils/stripe/server';
-import { getErrorRedirect } from '@/utils/helpers';
-import { User } from '@supabase/supabase-js';
-import { useRouter, usePathname } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { Moon } from 'lucide-react';
 
 type BillingInterval = 'month' | 'year';
-
-interface Price {
-  id: string;
-  unit_amount: number;
-  currency: string;
-  interval: BillingInterval;
-  description: string;
-  active: boolean;
-  type: 'recurring' | 'one_time';
-  interval_count: number;
-  metadata: Record<string, any>;
-  product_id: string;
-  trial_period_days: number | null;
-}
 
 interface Product {
   id: string;
   name: string;
   description: string;
-  prices: Price[];
+  prices: Record<BillingInterval, { amount: number; stripeUrl: string }>;
   perks: string[];
 }
 
 interface Props {
-  user: User | null | undefined;
+  user: any;
   subscription: any;
 }
 
@@ -49,34 +31,16 @@ const products: Product[] = [
     id: 'prod_Tribe',
     name: 'Tribe Tier',
     description: 'Perfect for those starting their journey in the purpose economy.',
-    prices: [
-      {
-        id: 'price_tribe_month',
-        active: true,
-        interval: 'month',
-        interval_count: 1,
-        unit_amount: 4400,
-        currency: 'usd',
-        description: 'Monthly Tribe Tier',
-        metadata: {},
-        product_id: 'prod_Tribe',
-        trial_period_days: null,
-        type: 'recurring',
+    prices: {
+      month: {
+        amount: 44,
+        stripeUrl: 'https://buy.stripe.com/28E5kDd57aP4gFhbDr5wI0Z'
       },
-      {
-        id: 'price_tribe_year',
-        active: true,
-        interval: 'year',
-        interval_count: 1,
-        unit_amount: 44000,
-        currency: 'usd',
-        description: 'Yearly Tribe Tier',
-        metadata: {},
-        product_id: 'prod_Tribe',
-        trial_period_days: null,
-        type: 'recurring',
+      year: {
+        amount: 440,
+        stripeUrl: 'https://buy.stripe.com/00w7sL7KN8GW60D5f35wI10'
       }
-    ],
+    },
     perks: [
       'Daily Huddles (15-min livestream pep talks)',
       'Access to weekly livestream classes + replays',
@@ -89,34 +53,16 @@ const products: Product[] = [
     id: 'prod_Manifestor',
     name: 'Manifestor Tier',
     description: 'Best for those ready to level up spiritually & financially with group support.',
-    prices: [
-      {
-        id: 'price_manifestor_month',
-        active: true,
-        interval: 'month',
-        interval_count: 1,
-        unit_amount: 14400,
-        currency: 'usd',
-        description: 'Monthly Manifestor Tier',
-        metadata: {},
-        product_id: 'prod_Manifestor',
-        trial_period_days: null,
-        type: 'recurring',
+    prices: {
+      month: {
+        amount: 144,
+        stripeUrl: 'https://buy.stripe.com/bJe7sL5CF0aq0Gj22R5wI11'
       },
-      {
-        id: 'price_manifestor_year',
-        active: true,
-        interval: 'year',
-        interval_count: 1,
-        unit_amount: 144000,
-        currency: 'usd',
-        description: 'Yearly Manifestor Tier',
-        metadata: {},
-        product_id: 'prod_Manifestor',
-        trial_period_days: null,
-        type: 'recurring',
+      year: {
+        amount: 1440,
+        stripeUrl: 'https://buy.stripe.com/8x2aEX9SVbT81KndLz5wI12'
       }
-    ],
+    },
     perks: [
       'Everything in Tribe Tier',
       '2x Weekly Group Spiritual Coaching Sessions (live Q&A + feedback)',
@@ -130,34 +76,16 @@ const products: Product[] = [
     id: 'prod_Ascension',
     name: 'Ascension Tier',
     description: 'For serious seekers, creators, and leaders who want direct access.',
-    prices: [
-      {
-        id: 'price_ascension_month',
-        active: true,
-        interval: 'month',
-        interval_count: 1,
-        unit_amount: 44400,
-        currency: 'usd',
-        description: 'Monthly Ascension Tier',
-        metadata: {},
-        product_id: 'prod_Ascension',
-        trial_period_days: null,
-        type: 'recurring',
+    prices: {
+      month: {
+        amount: 444,
+        stripeUrl: 'https://buy.stripe.com/9B6bJ18ORg9o2Or4aZ5wI0X'
       },
-      {
-        id: 'price_ascension_year',
-        active: true,
-        interval: 'year',
-        interval_count: 1,
-        unit_amount: 444000,
-        currency: 'usd',
-        description: 'Yearly Ascension Tier',
-        metadata: {},
-        product_id: 'prod_Ascension',
-        trial_period_days: null,
-        type: 'recurring',
+      year: {
+        amount: 4440,
+        stripeUrl: 'https://buy.stripe.com/5kQ7sLd577CSbkX22R5wI0Y'
       }
-    ],
+    },
     perks: [
       'Everything in Manifestor Tier',
       '1-on-1 Spiritual Coaching (monthly private session with Hahz)',
@@ -170,46 +98,13 @@ const products: Product[] = [
 ];
 
 export default function PricingRounded({ user, subscription }: Props) {
-  const router = useRouter();
-  const currentPath = usePathname();
   const [billingInterval, setBillingInterval] = useState<BillingInterval>('month');
-  const [priceIdLoading, setPriceIdLoading] = useState<string>();
+  const [loadingId, setLoadingId] = useState<string>();
+  const router = useRouter();
 
-  const handleStripeCheckout = async (price: Price) => {
-    try {
-      setPriceIdLoading(price.id);
-
-      if (!user) {
-        router.push('/signup');
-        return;
-      }
-
-      const { errorRedirect, sessionId } = await checkoutWithStripe(price, currentPath);
-
-      if (errorRedirect) {
-        router.push(errorRedirect);
-        return;
-      }
-
-      if (!sessionId) throw new Error('Stripe sessionId missing.');
-
-      const stripe = await getStripe();
-      if (!stripe) throw new Error('Stripe failed to load.');
-
-      const { error } = await stripe.redirectToCheckout({ sessionId });
-      if (error) throw error;
-    } catch (err: any) {
-      console.error('Checkout error:', err);
-      router.push(
-        getErrorRedirect(
-          currentPath,
-          'Checkout failed',
-          err.message || 'Please try again later.'
-        )
-      );
-    } finally {
-      setPriceIdLoading(undefined);
-    }
+  const handleSubscribe = (url: string, id: string) => {
+    setLoadingId(id);
+    window.location.href = url;
   };
 
   return (
@@ -239,14 +134,12 @@ export default function PricingRounded({ user, subscription }: Props) {
 
         <div className="grid gap-6 mt-10 md:grid-cols-3">
           {products.map((product) => {
-            const price = product.prices.find(p => p.interval === billingInterval);
-            if (!price) return null;
-
+            const price = product.prices[billingInterval];
             const priceString = new Intl.NumberFormat('en-US', {
               style: 'currency',
-              currency: price.currency,
-              minimumFractionDigits: 0
-            }).format(price.unit_amount / 100);
+              currency: 'USD',
+              minimumFractionDigits: 2
+            }).format(price.amount);
 
             return (
               <Card key={product.id} className="w-full max-w-sm text-black bg-white border-2 rounded-4xl">
@@ -262,8 +155,8 @@ export default function PricingRounded({ user, subscription }: Props) {
                   <Button
                     variant="default"
                     type="button"
-                    onClick={() => handleStripeCheckout(price)}
-                    disabled={priceIdLoading === price.id}
+                    onClick={() => handleSubscribe(price.stripeUrl, product.id)}
+                    disabled={loadingId === product.id}
                     className="w-full mt-4 rounded-4xl"
                   >
                     Subscribe
