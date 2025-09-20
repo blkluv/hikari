@@ -1,5 +1,3 @@
-// components/mobile-nav.tsx
-
 'use client';
 
 import * as React from 'react';
@@ -44,18 +42,21 @@ export function MobileNav({ items, children, user }: MobileNavProps) {
         </nav>
         <div className="flex items-center mt-4 space-x-2">
           <ModeToggle />
-          <Link
-            href={user ? '/dashboard' : '/login'}
+          <a
+            href="https://billing.stripe.com/p/login/eVaaH68crfwxf3WbII"
+            target="_blank"
+            rel="noopener noreferrer"
             className={cn(
               buttonVariants({ variant: 'secondary', size: 'sm' }),
               'px-4'
             )}
           >
             {user ? 'Dashboard' : 'Login'}
-          </Link>
+          </a>
         </div>
         {children}
       </div>
     </div>
   );
 }
+

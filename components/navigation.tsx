@@ -8,7 +8,7 @@ import { MobileNav } from '@/components/mobile-nav';
 import { Icons } from '@/components/icons';
 import { buttonVariants } from '@/components/ui/button';
 import { ModeToggle } from '@/components/mode-toggle';
-import { SunIcon } from '@heroicons/react/24/solid'
+import { SunIcon } from '@heroicons/react/24/solid';
 
 interface CircularNavProps {
   items?: MainNavItem[];
@@ -51,15 +51,17 @@ export default function CircularNavigation({
         <div className="hidden md:block">
           <ModeToggle />
         </div>
-        <Link
-          href={user ? '/dashboard' : '/signin'}
+        <a
+          href="https://billing.stripe.com/p/login/eVaaH68crfwxf3WbII"
+          target="_blank"
+          rel="noopener noreferrer"
           className={cn(
             buttonVariants({ variant: 'outline', size: 'sm' }),
             'rounded-full p-2 md:p-5 text-xs md:text-sm hidden md:inline-flex'
           )}
         >
           {user ? 'Dashboard' : 'Login'}
-        </Link>
+        </a>
         <button
           className="md:hidden"
           onClick={() => setShowMobileMenu(!showMobileMenu)}
