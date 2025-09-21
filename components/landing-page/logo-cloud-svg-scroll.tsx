@@ -4,7 +4,8 @@ import {
   NextjsSvg,
   SupabaseSvg,
   VercelSvg,
-  GithubSvg
+  GithubSvg,
+  StripeSvg // ✅ add this
 } from '@/components/svg';
 import Marquee from '@/components/magicui/marquee';
 
