@@ -73,34 +73,35 @@ export default function FooterPrimary() {
 
           {/* Web5 Socials */}
           <div>
-            <h3 className="mb-4 text-lg font-bold">Web5 Socials</h3>
+            <h3 className="mb-4 text-lg font-bold">WEB5 SOCIALZ</h3>
             <ul className="space-y-2">
-              <li><AnimatedUnderline href="https://atl5d.com" className="text-primary">ATL5D</AnimatedUnderline></li>
-              <li><AnimatedUnderline href="https://luvnft.com" className="text-primary">LUV NFT</AnimatedUnderline></li>
-              <li><AnimatedUnderline href="https://healxyz.com" className="text-primary">HealXYZ</AnimatedUnderline></li>
-              <li><AnimatedUnderline href="https://rnt.social" className="text-primary">RNT.SOCIAL</AnimatedUnderline></li>
-              <li><AnimatedUnderline href="/socials" className="text-primary">See all →</AnimatedUnderline></li>
+              <li><AnimatedUnderline href="https://atl5d.com" className="text-primary">ATL5D →</AnimatedUnderline></li>
+              <li><AnimatedUnderline href="https://luvnft.com" className="text-primary">LUV NFT →</AnimatedUnderline></li>
+              <li><AnimatedUnderline href="https://healxyz.com" className="text-primary">HEALXYZ →</AnimatedUnderline></li>
+              <li><AnimatedUnderline href="https://rnt.social" className="text-primary">RNT.SOCIAL →</AnimatedUnderline></li>
+              <li><AnimatedUnderline href="https://w3w.delivery" className="text-primary">W3W.DELIVERY →</AnimatedUnderline></li>
             </ul>
           </div>
 
           {/* Company */}
           <div>
-            <h3 className="mb-4 text-lg font-bold">Company</h3>
+            <h3 className="mb-4 text-lg font-bold">HAHZ.LIVE</h3>
             <ul className="space-y-2">
-              <li><AnimatedUnderline href="/about" className="text-primary">About</AnimatedUnderline></li>
-              <li><AnimatedUnderline href="/documentation" className="text-primary">Documentation</AnimatedUnderline></li>
-              <li><AnimatedUnderline href="/blog" className="text-primary">Blog</AnimatedUnderline></li>
-              <li><AnimatedUnderline href="mailto:hahz5d@pm.me" className="text-primary">Contact us</AnimatedUnderline></li>
+              <li><AnimatedUnderline href="https://orange.hahz.live" className="text-primary">ORANGE. - LIVE →</AnimatedUnderline></li>
+              <li><AnimatedUnderline href="/documentation" className="text-primary">LOGIN →</AnimatedUnderline></li>
+              <li><AnimatedUnderline href="/blog" className="text-primary">BLOG →</AnimatedUnderline></li>
+              <li><AnimatedUnderline href="mailto:hahz5d@pm.me" className="text-primary">EMAIL →</AnimatedUnderline></li>
             </ul>
           </div>
 
           {/* Connect */}
           <div>
-            <h3 className="mb-4 text-lg font-bold">Connect</h3>
+            <h3 className="mb-4 text-lg font-bold">TAP IN</h3>
             <ul className="space-y-2">
-              <li><AnimatedUnderline href="https://x.com/wizardofhahz" className="text-primary">X</AnimatedUnderline></li>
-              <li><AnimatedUnderline href="https://linkedin.com/in/hassanterry" className="text-primary">LinkedIn</AnimatedUnderline></li>
-              <li><AnimatedUnderline href="https://t.me/hahznft" className="text-primary">Telegram</AnimatedUnderline></li>
+              <li><AnimatedUnderline href="https://x.com/wizardofhahz" className="text-primary">X →</AnimatedUnderline></li>
+              <li><AnimatedUnderline href="https://linkedin.com/in/hassanterry" className="text-primary">LINKEDIN →</AnimatedUnderline></li>
+              <li><AnimatedUnderline href="https://t.me/hahznft" className="text-primary">TELEGRAM →</AnimatedUnderline></li>
+              <li><AnimatedUnderline href="https://youtube.com/@wizardofhahz" className="text-primary">YOUTUBE →</AnimatedUnderline></li>
             </ul>
           </div>
 
@@ -108,7 +109,7 @@ export default function FooterPrimary() {
           <div>
             <h3 className="mb-4 text-lg font-bold">Sign up for our newsletter</h3>
             <p className="mb-4 text-primary">
-              HAHZ.LIVE is the future of higher learning. Subscribe to get the latest design news, articles, resources, updates and inspiration.
+              HAHZ.LIVE is the future of higher learning and entertainment. Subscribe to get the latest design news, articles, resources, updates and inspiration.
             </p>
             <form onSubmit={handleSubmit} className="flex w-full">
               <div className="flex items-center w-full border border-gray-300 rounded-md focus-within:outline-none">

@@ -7,16 +7,12 @@ export const marketingConfig: MarketingConfig = {
       href: '/#features'
     },
     {
-      title: 'Pricing',
-      href: '/#pricing'
+      title: 'Billing',
+      href: 'https://billing.stripe.com/p/login/eVaaH68crfwxf3WbII'
     },
     {
       title: 'Blog',
       href: '/blog'
-    },
-    {
-      title: 'YouTube',
-      href: 'https://www.youtube.com/@wizardofhahz'
     }
   ]
 };

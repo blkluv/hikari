@@ -98,8 +98,8 @@ export const GithubSvg = (props: SVGProps<SVGSVGElement>) => (
 
 export function LogoSupacrawler() {
   return (
-    <Link href="https://supacrawler.com" aria-label="Home" className={clsx('flex items-center gap-x-1 mr-2')}>
-      <img src="/images/supacrawler.jpg" className="size-6 sm:size-8" />
+    <Link href="https://rnt.social" aria-label="Home" className={clsx('flex items-center gap-x-1 mr-2')}>
+      <img src="/images/supacrawler.svg" className="size-6 sm:size-8" />
       <span
         className={clsx(
           'flex items-center text-sm py-1 tracking-tighter text-slate-900',
@@ -110,7 +110,7 @@ export function LogoSupacrawler() {
             'pointer-events-none whitespace-pre-wrap font-bold bg-gradient-to-b bg-clip-text text-transparent text-slate-900',
           )}
         >
-          Supacrawler
+          RNT.SOCIAL
         </span>
       </span>
     </Link>

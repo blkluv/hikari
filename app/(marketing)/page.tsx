@@ -18,13 +18,13 @@ export default async function IndexPage() {
         <section className="my-16">
           <div className="flex items-center w-full mb-8">
             <div className="flex flex-col items-center justify-center w-full">
-              <h2 className="text-3xl font-bold">Tribe highlights</h2>
-              <Link href="https://x.com/wizardofhahz" target="_blank" rel="noopener noreferrer" className="mt-2 text-blue-500 hover:underline">
-               Join the tribe
+              <h2 className="text-3xl font-bold">START</h2>
+              <Link href="https://t.me/hahzlive" target="_blank" rel="noopener noreferrer" className="mt-2 text-blue-500 hover:underline">
+               JOIN THE TELEGRAM LOBBY
               </Link>
             </div>
           </div>
-          <Link href="https://x.com/luvnft/status/1968455677933768779" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center w-full mx-auto">
+          <Link href="https://t.me/hahzlive" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center w-full mx-auto">
             <Image src="/images/tweet.png" alt="Tweet by shadcn" width={550} height={300} />
           </Link>
         </section>

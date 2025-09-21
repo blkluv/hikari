@@ -80,20 +80,22 @@ export default function HeroSection() {
           )}
 
           <h1 className="text-2xl font-bold tracking-tight font-heading sm:text-4xl md:text-5xl lg:text-6xl">
-            Your Front Row Seat to Motivation, Tech, & Spiritual — Live
+            📺 Think Netflix for your soul — live spiritual lessons, higher learning, and guidance from the 🧙🏽‍♂️ Wizard of Hahz
+
           </h1>
 
           <div className="max-w-[42rem] font-bold tracking-tight text-primary sm:text-xl sm:leading-8 rounded-full p-2">
-            🤴🏽 Happily Married to My Twin Flame, Father of Three Boys & Two Cats,
-            and Creator of the Web5 Purpose Economy.
+            A premium livestream network of spiritual lessons, mastermind energy,
+            and a private tribe where you earn to learn spiritual wealth. Join
+            live sessions, connect with like-minded souls, and level up your life.
           </div>
 
           <div className="flex flex-wrap justify-center gap-4">
             <Link
-              href="https://t.me/hahznft"
+              href="https://t.me/hahzlive"
               className={cn(buttonVariants({ size: 'xl' }), 'rounded-full border-2 border-primary dark:border-white text-bold text-white')}
             >
-              Tap In on Telegram
+              T.ME/HAHZLIVE
             </Link>
 
             {siteConfig.links.github && (
@@ -103,7 +105,7 @@ export default function HeroSection() {
                 rel="noreferrer"
                 className={cn(buttonVariants({ variant: 'outline', size: 'xl' }), 'rounded-full border-2 border-primary dark:border-white text-semibold')}
               >
-                Live
+                LIVE
               </Link>
             )}
           </div>

@@ -22,35 +22,35 @@ export default function LogoCloud() {
   return (
     <div>
       <p className="mt-12 text-xs uppercase text-primary text-center font-bold tracking-[0.3em]">
-        Built with these brands
+        WEB5 SOCIALZ
       </p>
-      <div className="grid grid-cols-1 place-items-center justify-center my-12 space-y-4 sm:mt-8 sm:space-y-0 md:mx-auto md:max-w-2xl sm:grid sm:gap-10 sm:grid-cols-6">
-        <div className="flex items-center justify-center h-15 w-24">
-          <a href="https://nextjs.org" aria-label="Next.js Link">
+      <div className="grid justify-center grid-cols-1 my-12 space-y-4 place-items-center sm:mt-8 sm:space-y-0 md:mx-auto md:max-w-2xl sm:grid sm:gap-10 sm:grid-cols-6">
+        <div className="flex items-center justify-center w-24 h-15">
+          <a href="https://atl5d.com" aria-label="atl5d.com Link">
             <NextjsSvg className="size-full" style={{ color: primaryColor }} />
           </a>
         </div>
-        <div className="flex items-center justify-center h-15 w-24">
-          <a href="https://vercel.com" aria-label="Vercel.com Link">
+        <div className="flex items-center justify-center w-24 h-15">
+          <a href="https://healxyz.com" aria-label="healxyz.com Link">
             <VercelSvg className="size-full" style={{ color: primaryColor }} />
           </a>
         </div>
-        <div className="flex items-center justify-center h-12 w-24">
-          <a href="https://stripe.com" aria-label="stripe.com Link">
+        <div className="flex items-center justify-center w-24 h-12">
+          <a href="https://luvnft.com" aria-label="luvnft.com Link">
             <StripeSvg className="size-full" style={{ color: primaryColor }} />
           </a>
         </div>
         <LogoSupacrawler />
-        <div className="flex items-center justify-center h-15 w-24 sm:ml-8">
-          <a href="https://supabase.io" aria-label="supabase.io Link">
+        <div className="flex items-center justify-center w-24 h-15 sm:ml-8">
+          <a href="https://rnt.social" aria-label="RNT.SOCIAL Link">
             <SupabaseSvg
               className="size-full"
               style={{ color: primaryColor }}
             />
           </a>
         </div>
-        <div className="flex items-center justify-center h-15 w-24">
-          <a href="https://github.com" aria-label="github.com Link">
+        <div className="flex items-center justify-center w-24 h-15">
+          <a href="https://w3w.delivery" aria-label="w3w.delivery Link">
             <GithubSvg className="size-full" style={{ color: primaryColor }} />
           </a>
         </div>

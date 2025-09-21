@@ -12,12 +12,11 @@ export default function FeaturesHover() {
     >
       <div className="mx-auto flex max-w-[58rem] flex-col items-center space-y-4 text-center">
         <h2 className="font-heading text-3xl leading-[1.1] sm:text-3xl md:text-6xl">
-          Purpose Over Profit
+          ORANGE.
         </h2>
         <p className="max-w-[85%] leading-normal text-muted-foreground sm:text-lg sm:leading-7">
-          Join the spiritual-purpose economy. Manifested by the Web5 creator,
-          this ecosystem gives you tools, insights, and IRL experiences —
-          including the first physical asset tokenized as an NFT (2021).
+          ORANGE. — the live stage of hahz.live. Spiritual entertainment, PPV
+          livestreams, and tribe-powered moments where you earn to learn spiritual wealth.
         </p>
       </div>
       <div className="mx-auto grid w-full gap-6 sm:grid-cols-2 md:grid-cols-3 md:max-w-[64rem]">

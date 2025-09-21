@@ -10,10 +10,10 @@ export default function Testimonials() {
 
   return (
     <div className="relative flex flex-col items-center justify-center max-w-5xl p-4 mx-auto">
-      <div className="flex items-center w-full max-w-7xl mb-8">
+      <div className="flex items-center w-full mb-8 max-w-7xl">
         <div className="flex-grow border-t border-gray-300"></div>
         <div className="flex-shrink px-2 text-center">
-          <h2 className="text-3xl font-bold">Testimonials</h2>
+          <h2 className="text-3xl font-bold">REACTIONS</h2>
           <p className="text-muted-foreground">
             What everyone else is saying
           </p>
@@ -24,15 +24,15 @@ export default function Testimonials() {
         {groupedTestimonials.map((group, groupIndex) => (
           <div
             key={groupIndex}
-            className="flex flex-col w-full md:w-1/3 p-2 h-fit"
+            className="flex flex-col w-full p-2 md:w-1/3 h-fit"
           >
             {group.map((testimonial, index) => (
-              <Card key={index} className="mb-4 h-full">
-                <CardHeader className="flex flex-row items-center bg-zinc-100 dark:bg-zinc-800 p-2 rounded-t-xl">
+              <Card key={index} className="h-full mb-4">
+                <CardHeader className="flex flex-row items-center p-2 bg-zinc-100 dark:bg-zinc-800 rounded-t-xl">
                   <div className="flex items-center">
-                    <Avatar className="size-7 mr-2"> {/* Adjusted size for smaller avatar */}
-                      <AvatarImage src={testimonial.avatarImg} className="h-full w-full" />
-                      <AvatarFallback className="h-full w-full">
+                    <Avatar className="mr-2 size-7"> {/* Adjusted size for smaller avatar */}
+                      <AvatarImage src={testimonial.avatarImg} className="w-full h-full" />
+                      <AvatarFallback className="w-full h-full">
                         {testimonial.avatarFallback}
                       </AvatarFallback>
                     </Avatar>

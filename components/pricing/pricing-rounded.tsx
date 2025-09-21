@@ -96,9 +96,9 @@ export default function PricingRounded({ user, subscription }: Props) {
   return (
     <section className="container mx-auto" id="pricing">
       <div className="flex flex-col items-center justify-center w-full min-h-screen py-10">
-        <h1 className="text-3xl font-bold text-center">Subscription Plans</h1>
+        <h1 className="text-3xl font-bold text-center">SUBS</h1>
         <p className="mt-2 text-center text-muted-foreground">
-          Choose a tier that fits your journey in the purpose economy.
+          Choose a subscription tier that aligns with your spiritual journey.
         </p>
 
         <div className="flex items-center justify-center mt-6 space-x-4">
