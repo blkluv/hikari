@@ -1,7 +1,6 @@
 'use client';
 import { useEffect, useState } from 'react';
 import {
-  StripeSvg,
   NextjsSvg,
   SupabaseSvg,
   VercelSvg,
@@ -21,27 +20,27 @@ export default function LogoCloudScroll() {
   const logos = [
     <NextjsSvg
       key="nextjs"
-      className="size-full items-center mx-auto"
+      className="items-center mx-auto size-full"
       style={{ color: primaryColor }}
     />,
     <VercelSvg
       key="vercel"
-      className="size-full items-center mx-auto"
+      className="items-center mx-auto size-full"
       style={{ color: primaryColor }}
     />,
     <StripeSvg
       key="stripe"
-      className="size-full items-center"
+      className="items-center size-full"
       style={{ color: primaryColor }}
     />,
     <SupabaseSvg
       key="supabase"
-      className="size-full items-center mx-auto"
+      className="items-center mx-auto size-full"
       style={{ color: primaryColor }}
     />,
     <GithubSvg
       key="github"
-      className="size-full items-center mx-auto"
+      className="items-center mx-auto size-full"
       style={{ color: primaryColor }}
     />
   ];
