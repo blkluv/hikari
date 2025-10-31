@@ -92,10 +92,10 @@ export default function HeroSection() {
 
           <div className="flex flex-wrap justify-center gap-4">
             <Link
-              href="https://t.me/hahzlive"
+              href="https://linketr.ee/web5d"
               className={cn(buttonVariants({ size: 'xl' }), 'rounded-full border-2 border-primary dark:border-white text-bold text-white')}
             >
-              T.ME/HAHZLIVE
+              WEB5D LINKTREE
             </Link>
 
             {siteConfig.links.github && (

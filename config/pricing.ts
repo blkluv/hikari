@@ -8,42 +8,58 @@ interface Plan {
 
 const pricingPlans: Plan[] = [
   {
-    name: 'Tribe Tier',
-    description: 'Perfect for those starting their journey in the purpose economy.',
+    name: '💟 Tribe Tier',
+    description: 'Your intro to the Web5 family. ✨ Connect, learn, and earn with purpose.',
     features: [
-      'Daily Huddles (15-min livestream pep talks)',
-      'Access to weekly livestream classes + replays',
-      'Private community chat + mastermind tribe',
-      'Earn tribe memecoins for showing up & participating',
-      'Unlock tokenized rewards for engagement'
+      '📲 Mobile number for direct Web5 alerts',
+      '👻 Phantom Wallet setup (Web5 🏦 onboarding)',
+      '🆔 Follow from official Web5 TikTok channel',
+      '💼 Tokenized purpose',
+      '💬 Private Tribe mastermind chat',
+      '🟠 Livestream Web5 show alerts',
+      '💖 44 tokens in $FOOD • $WATAA • $RNT • $LOVE',
+      '⚡️ 4 Bitcoin $RNT • L$VE • HAI$ rewards'
     ],
     monthlyPrice: 44,
     yearlyPrice: 440
   },
   {
-    name: 'Manifestor Tier',
-    description: 'Best for those ready to level up spiritually & financially with group support.',
+    name: '☮️ Manifestor Tier',
+    description: 'For creators & coders shaping the Purpose Economy.',
     features: [
-      'Everything in Tribe Tier',
-      '2x Weekly Group Spiritual Coaching Sessions (live Q&A + feedback)',
-      'Boosted tribe memecoin rewards (higher earning multipliers)',
-      'Access to resource vault (guides, meditations, crypto insights)',
-      'Monthly NFT/Token drops as proof of participation',
-      'Network in the manifested mastermind of leaders & visionaries'
+      '📲 Mobile number for direct updates',
+      '👻 Phantom Wallet Account (Web5 🏦)',
+      '🆔 Custom TikTok AR Effect ID (+💟 bonus)',
+      '💼 Tokenized purpose',
+      '🗺️ Purpose spotlight on the HAHZ.LIVE Map',
+      '💬 Private Manifestor mastermind group',
+      '🟠 Livestream show alerts via 📲',
+      '🎙️ Branded TikTok AR effect for ReelViews',
+      '💖 444 tokens in $FOOD • $WATAA • $RNT • $LOVE',
+      '⚡️ 44 Bitcoin $RNT • L$VE • HAI$'
     ],
     monthlyPrice: 144,
     yearlyPrice: 1440
   },
   {
-    name: 'Ascension Tier',
-    description: 'For serious seekers, creators, and leaders who want direct access.',
+    name: '☯️ Ascension Tier',
+    description: 'For visionaries ready to ascend Web5 with purpose.',
     features: [
-      'Everything in Manifestor Tier',
-      '1-on-1 Spiritual Coaching (monthly private session with Hahz)',
-      'Priority spotlight coaching during livestreams',
-      'Exclusive VIP Memecoin Airdrops + tokenized recognition',
-      'Access to special IRL meetups / retreats (discounted or free)',
-      'Become part of the core inner circle co-creating the Web5 Purpose Economy'
+      '📲 Mobile number for private updates',
+      '🤖 5 AI content articles a month',
+      '👻 Phantom Wallet Account (Web5 🏦)',
+      '🆔 Tokenized Bitcoin Identity',
+      '🪙 Custom stablecoin (CreatorCoin)',
+      '🌴 Link to CreatorCoin in Web5D LinkTree',
+      '💼 Tokenized purchase',
+      '🗺️ Purpose spotlight on the HAHZ.LIVE Map',
+      '💬 Private Ascension mastermind circle',
+      '📺 WEB5DTV access',
+      '🟠 Livestream show alerts via 📲',
+      '🧙🏽 Ask HAHZ — Spiritual Healthcare sessions',
+      '📚 LUMEE BOOTH AI Academy course grant',
+      '💖 4,444 tokens in $FOOD • $WATAA • $RNT • $LOVE',
+      '⚡️ 444 Bitcoin $RNT • L$VE • HAI$ • $CBO'
     ],
     monthlyPrice: 444,
     yearlyPrice: 4440
@@ -52,10 +68,13 @@ const pricingPlans: Plan[] = [
 
 export default pricingPlans;
 
+// ---------------------------------------------------------------------------
+
 import { Tables } from '@/types/db';
 
 type Product = Tables<'products'>;
 type Price = Tables<'prices'>;
+
 interface ProductWithPrices extends Product {
   prices: Price[];
 }
@@ -63,13 +82,13 @@ interface ProductWithPrices extends Product {
 export const dummyPricing: ProductWithPrices[] = [
   {
     id: 'tribe-tier',
-    name: 'Tribe Tier',
-    description: 'Perfect for those starting their journey in the purpose economy.',
+    name: '💟 Tribe Tier',
+    description: 'Your intro to the Web5 family. ✨ Connect, learn, and earn with purpose.',
     prices: [
       {
         id: 'tribe-tier-month',
         currency: 'USD',
-        unit_amount: 4400, // $44
+        unit_amount: 4400,
         interval: 'month',
         interval_count: 1,
         trial_period_days: null,
@@ -82,7 +101,7 @@ export const dummyPricing: ProductWithPrices[] = [
       {
         id: 'tribe-tier-year',
         currency: 'USD',
-        unit_amount: 44000, // $440
+        unit_amount: 44000,
         interval: 'year',
         interval_count: 1,
         trial_period_days: null,
@@ -99,13 +118,13 @@ export const dummyPricing: ProductWithPrices[] = [
   },
   {
     id: 'manifestor-tier',
-    name: 'Manifestor Tier',
-    description: 'Best for those ready to level up spiritually & financially with group support.',
+    name: '☮️ Manifestor Tier',
+    description: 'For creators & coders shaping the Purpose Economy.',
     prices: [
       {
         id: 'manifestor-tier-month',
         currency: 'USD',
-        unit_amount: 14400, // $144
+        unit_amount: 14400,
         interval: 'month',
         interval_count: 1,
         trial_period_days: null,
@@ -118,7 +137,7 @@ export const dummyPricing: ProductWithPrices[] = [
       {
         id: 'manifestor-tier-year',
         currency: 'USD',
-        unit_amount: 144000, // $1,440
+        unit_amount: 144000,
         interval: 'year',
         interval_count: 1,
         trial_period_days: null,
@@ -135,13 +154,13 @@ export const dummyPricing: ProductWithPrices[] = [
   },
   {
     id: 'ascension-tier',
-    name: 'Ascension Tier',
-    description: 'For serious seekers, creators, and leaders who want direct access.',
+    name: '☯️ Ascension Tier',
+    description: 'For visionaries ready to ascend Web5 with purpose.',
     prices: [
       {
         id: 'ascension-tier-month',
         currency: 'USD',
-        unit_amount: 44400, // $444
+        unit_amount: 44400,
         interval: 'month',
         interval_count: 1,
         trial_period_days: null,
@@ -154,7 +173,7 @@ export const dummyPricing: ProductWithPrices[] = [
       {
         id: 'ascension-tier-year',
         currency: 'USD',
-        unit_amount: 444000, // $4,440
+        unit_amount: 444000,
         interval: 'year',
         interval_count: 1,
         trial_period_days: null,
