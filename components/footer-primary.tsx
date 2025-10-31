@@ -104,32 +104,6 @@ export default function FooterPrimary() {
             </ul>
           </div>
 
-          {/* Newsletter */}
-          <div>
-            <h3 className="mb-4 text-lg font-bold">Sign up for our newsletter</h3>
-            <p className="mb-4 text-primary">
-              HAHZ.LIVE is the future of higher learning and entertainment. Subscribe to get the latest design news, articles, resources, updates and inspiration.
-            </p>
-            <form onSubmit={handleSubmit} className="flex w-full">
-              <div className="flex items-center w-full border border-gray-300 rounded-md focus-within:outline-none">
-                <Input
-                  type="email"
-                  placeholder="Enter your email"
-                  className="relative z-20 w-full text-sm border-none"
-                  required
-                  value={email}
-                  onChange={(e: ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
-                />
-                <CoolMode>
-                  <Button type="submit" className="my-1 mr-1 text-white bg-black rounded-md">
-                    <ArrowRightIcon className="w-5 h-5" />
-                  </Button>
-                </CoolMode>
-              </div>
-            </form>
-          </div>
-        </div>
-
         {/* Footer Bottom */}
         <div className="flex flex-col items-center justify-between pt-6 mt-10 border-t md:flex-row">
           <div className="flex items-center space-x-2">
