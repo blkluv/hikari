@@ -8,10 +8,6 @@ import { Input } from '@/components/ui/input'
 import { useToast } from '@/components/ui/use-toast'
 import { CoolMode } from '@/components/magicui/cool-mode'
 
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-)
 
 type AnimatedUnderlineProps = {
   children: React.ReactNode
