@@ -1,14 +1,18 @@
 interface Plan {
+  id: string;
   name: string;
+  emoji: string;
   description: string;
   features: string[];
   monthlyPrice: number;
   yearlyPrice: number;
 }
 
-const pricingPlans: Plan[] = [
+export const pricingPlans: Plan[] = [
   {
-    name: '💟 Tribe Tier',
+    id: 'tribe-tier',
+    emoji: '💟',
+    name: 'Tribe Tier',
     description: 'Your intro to the Web5 family. ✨ Connect, learn, and earn with purpose.',
     features: [
       '📲 Mobile number for direct Web5 alerts',
@@ -24,7 +28,9 @@ const pricingPlans: Plan[] = [
     yearlyPrice: 440
   },
   {
-    name: '☮️ Manifestor Tier',
+    id: 'manifestor-tier',
+    emoji: '☮️',
+    name: 'Manifestor Tier',
     description: 'For creators & coders shaping the Purpose Economy.',
     features: [
       '📲 Mobile number for direct updates',
@@ -42,7 +48,9 @@ const pricingPlans: Plan[] = [
     yearlyPrice: 1440
   },
   {
-    name: '☯️ Ascension Tier',
+    id: 'ascension-tier',
+    emoji: '☯️',
+    name: 'Ascension Tier',
     description: 'For visionaries ready to ascend Web5 with purpose.',
     features: [
       '📲 Mobile number for private updates',
@@ -63,129 +71,5 @@ const pricingPlans: Plan[] = [
     ],
     monthlyPrice: 444,
     yearlyPrice: 4440
-  }
-];
-
-export default pricingPlans;
-
-// ---------------------------------------------------------------------------
-
-import { Tables } from '@/types/db';
-
-type Product = Tables<'products'>;
-type Price = Tables<'prices'>;
-
-interface ProductWithPrices extends Product {
-  prices: Price[];
-}
-
-export const dummyPricing: ProductWithPrices[] = [
-  {
-    id: 'tribe-tier',
-    name: '💟 Tribe Tier',
-    description: 'Your intro to the Web5 family. ✨ Connect, learn, and earn with purpose.',
-    prices: [
-      {
-        id: 'tribe-tier-month',
-        currency: 'USD',
-        unit_amount: 4400,
-        interval: 'month',
-        interval_count: 1,
-        trial_period_days: null,
-        type: 'recurring',
-        active: true,
-        product_id: 'tribe-tier',
-        description: null,
-        metadata: null
-      },
-      {
-        id: 'tribe-tier-year',
-        currency: 'USD',
-        unit_amount: 44000,
-        interval: 'year',
-        interval_count: 1,
-        trial_period_days: null,
-        type: 'recurring',
-        active: true,
-        product_id: 'tribe-tier',
-        description: null,
-        metadata: null
-      }
-    ],
-    image: null,
-    metadata: null,
-    active: null
-  },
-  {
-    id: 'manifestor-tier',
-    name: '☮️ Manifestor Tier',
-    description: 'For creators & coders shaping the Purpose Economy.',
-    prices: [
-      {
-        id: 'manifestor-tier-month',
-        currency: 'USD',
-        unit_amount: 14400,
-        interval: 'month',
-        interval_count: 1,
-        trial_period_days: null,
-        type: 'recurring',
-        active: true,
-        product_id: 'manifestor-tier',
-        description: null,
-        metadata: null
-      },
-      {
-        id: 'manifestor-tier-year',
-        currency: 'USD',
-        unit_amount: 144000,
-        interval: 'year',
-        interval_count: 1,
-        trial_period_days: null,
-        type: 'recurring',
-        active: true,
-        product_id: 'manifestor-tier',
-        description: null,
-        metadata: null
-      }
-    ],
-    image: null,
-    metadata: null,
-    active: null
-  },
-  {
-    id: 'ascension-tier',
-    name: '☯️ Ascension Tier',
-    description: 'For visionaries ready to ascend Web5 with purpose.',
-    prices: [
-      {
-        id: 'ascension-tier-month',
-        currency: 'USD',
-        unit_amount: 44400,
-        interval: 'month',
-        interval_count: 1,
-        trial_period_days: null,
-        type: 'recurring',
-        active: true,
-        product_id: 'ascension-tier',
-        description: null,
-        metadata: null
-      },
-      {
-        id: 'ascension-tier-year',
-        currency: 'USD',
-        unit_amount: 444000,
-        interval: 'year',
-        interval_count: 1,
-        trial_period_days: null,
-        type: 'recurring',
-        active: true,
-        product_id: 'ascension-tier',
-        description: null,
-        metadata: null
-      }
-    ],
-    image: null,
-    metadata: null,
-    active: null
   }
 ];
