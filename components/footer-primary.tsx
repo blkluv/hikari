@@ -1,13 +1,17 @@
 'use client'
 
-import React, { useState, ChangeEvent, FormEvent } from 'react'
+import React, { useState, FormEvent } from 'react'
 import Link from 'next/link'
 import { createClient } from '@supabase/supabase-js'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { useToast } from '@/components/ui/use-toast'
-import { CoolMode } from '@/components/magicui/cool-mode'
 
+// ✅ Initialize Supabase client
+const supabase = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL!,
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+)
 
 type AnimatedUnderlineProps = {
   children: React.ReactNode
@@ -38,7 +42,7 @@ const AnimatedUnderline = ({ children, href = '/', className }: AnimatedUnderlin
 }
 
 export default function FooterPrimary() {
-  const [email, setEmail] = useState<string>('')
+  const [email, setEmail] = useState('')
   const { toast } = useToast()
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
@@ -49,7 +53,7 @@ export default function FooterPrimary() {
 
       toast({
         title: 'Subscribed! 🎉',
-        description: 'Thank you for subscribing! You will get an email when the next live session airs.',
+        description: 'Thank you for subscribing! You’ll get an email when the next live session airs.',
       })
       setEmail('')
     } catch (err) {
@@ -66,7 +70,6 @@ export default function FooterPrimary() {
     <footer className="py-10">
       <div className="container px-4 mx-auto">
         <div className="grid grid-cols-1 gap-8 md:grid-cols-4">
-
           {/* Web5 Socials */}
           <div>
             <h3 className="mb-4 text-lg font-bold">WEB5 SOCIALZ</h3>
@@ -99,6 +102,22 @@ export default function FooterPrimary() {
               <li><AnimatedUnderline href="https://t.me/hahznft" className="text-primary">TELEGRAM →</AnimatedUnderline></li>
             </ul>
           </div>
+
+          {/* Subscribe */}
+          <div>
+            <h3 className="mb-4 text-lg font-bold">STAY IN THE LOOP</h3>
+            <form onSubmit={handleSubmit} className="flex flex-col gap-2">
+              <Input
+                type="email"
+                placeholder="Enter your email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
+              <Button type="submit" className="w-full">Subscribe</Button>
+            </form>
+          </div>
+        </div>
 
         {/* Footer Bottom */}
         <div className="flex flex-col items-center justify-between pt-6 mt-10 border-t md:flex-row">
