@@ -84,7 +84,8 @@ export default function FooterPrimary() {
           <div>
             <h3 className="mb-4 text-lg font-bold">HEALXYZ</h3>
             <ul className="space-y-2">
-              <li><AnimatedUnderline href="https://orange.healxyz.com" className="text-primary">ORANGE. - LIVESTREAM →</AnimatedUnderline></li>
+              <li><AnimatedUnderline href="https://5dtok.healxyz.com" className="text-primary">5DTOK. - HEALXYZ SOCIAL →</AnimatedUnderline></li>
+              <li><AnimatedUnderline href="https://orange.healxyz.com" className="text-primary">ORANGE. - HEALXYZ LIVESTREAM →</AnimatedUnderline></li>
               <li><AnimatedUnderline href="https://billing.stripe.com/p/login/eVaaH68crfwxf3WbII" className="text-primary">BILLING →</AnimatedUnderline></li>
               <li><AnimatedUnderline href="/blog" className="text-primary">BLOG →</AnimatedUnderline></li>
               <li><AnimatedUnderline href="mailto:hahz5d@pm.me" className="text-primary">EMAIL →</AnimatedUnderline></li>
