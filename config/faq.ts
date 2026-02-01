@@ -2,33 +2,22 @@
 
 export const faqItems = [
   {
-    question: 'Is everything included in my subscription?',
+    question: 'What happens after I subscribe?',
     answer:
-      'Yes! Your subscription includes access to daily huddles, livestream classes, community chat, tribe memecoins, tokenized rewards, and all Hahz.live content. No hidden fees.'
+      'You receive a an invite to a private Telegram chat where you can ask HAHZ anything and depending on your tier schedule a 1-on-1 spiritual coaching session. You also get access to daily livestreams, classes, and tribe events locally and globally.'
   },
   {
     question: 'Can I get 1-on-1 coaching?',
     answer:
-      'Absolutely! Our Ascension Tier includes monthly 1-on-1 spiritual coaching sessions, priority spotlight in livestreams, and exclusive VIP perks.'
+      'Absolutely! subscribe to the tier with 1-on-1 spiritual 30 minute coaching and schedule your session at your convenience.'
   },
   {
-    question: 'How do the tribe memecoins work?',
+    question: 'Where is the livestream events hosted?',
     answer:
-      'Tribe memecoins are earned by participating in daily huddles, classes, and community challenges. They can be redeemed for rewards, NFTs, or special perks within Hahz.live.'
+      'HAHZ.LIVE has a subdomain called ORANGE.HAHZ.LIVE where all livestream events are hosted. You will receive Telegram alerts and email notifications for upcoming livestream events once you subscribe.'
   },
   {
-    question: 'What are tokenized rewards?',
-    answer:
-      'Tokenized rewards are special memecoin/stablecoin airdrops or NFT drops that recognize your participation and achievements in the Hahz.live community.'
-  },
-  {
-    question: 'Can I join the community without livestreams?',
-    answer:
-      'Yes, you can still join the private chat, participate in discussions, and earn memecoins, but full access to live classes requires an active subscription.'
-  },
-  {
-    question: 'Are there refunds or trials?',
-    answer:
-      'We offer a 3-day trial for new users to explore Hahz.live. Refunds are available if you are not satisfied within the first 7 days of your paid subscription.'
+     question: 'What are the livestream topics?',
+    answer: 'Our livestreams cover topics such as 🌐 Healing Digital Overload & Energetic Burnout to reclaim your energy; 🕊️ Healing Ancestral & Generational Wounds to break cycles of pain; 🌟 Healing Purpose & Soul Alignment to reconnect with your mission; 💞 Healing Heart & Relational Energetics to transform how you give and receive love; 🔮 Healing Intuition & Psychic Reawakening to awaken your inner gifts; and 🌍 Healing Collective Trauma & Global Fear to transmute uncertainty into unity. Each session offers real-time spiritual guidance and collective healing.'
   }
 ];

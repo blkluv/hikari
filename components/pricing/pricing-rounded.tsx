@@ -29,14 +29,9 @@ const pricingPlans: Plan[] = [
     name: 'Tribe Tier',
     description: 'Your intro to the Web5 family. ✨ Connect, learn, and earn with purpose.',
     features: [
-      '📲 Mobile number for direct Web5 alerts',
-      '👻 Phantom Wallet setup (Web5 🏦 onboarding)',
-      '🆔 Follow from official Web5 TikTok channel',
-      '💼 Tokenized purpose',
-      '💬 Private Tribe mastermind chat',
-      '🟠 Livestream Web5 show alerts',
-      '💖 44 tokens in $FOOD • $WATAA • $RNT • $LOVE',
-      '⚡️ 4 Bitcoin $RNT • L$VE • HAI$ rewards',
+      '💬 Private Tribe mastermind chat invite',
+      '🟠 Livestream show alerts',
+      '💖 Exclusive content',
     ],
     monthlyPrice: 44,
     yearlyPrice: 440,
@@ -45,18 +40,13 @@ const pricingPlans: Plan[] = [
     id: 'manifestor-tier',
     emoji: '☮️',
     name: 'Manifestor Tier',
-    description: 'For creators & coders shaping the Purpose Economy.',
+    description: 'For manifestors',
     features: [
-      '📲 Mobile number for direct updates',
-      '👻 Phantom Wallet Account (Web5 🏦)',
-      '🆔 Custom TikTok AR Effect ID (+💟 bonus)',
-      '💼 Tokenized purpose',
-      '🗺️ Purpose spotlight on the HAHZ.LIVE Map',
+      '📲 Two 1-on-1 sessions per month',
       '💬 Private Manifestor mastermind group',
-      '🟠 Livestream show alerts via 📲',
-      '🎙️ Branded TikTok AR effect for ReelViews',
-      '💖 444 tokens in $FOOD • $WATAA • $RNT • $LOVE',
-      '⚡️ 44 Bitcoin $RNT • L$VE • HAI$',
+      '🟠 Livestream show alerts',
+      '💖 Exclusive content',
+
     ],
     monthlyPrice: 144,
     yearlyPrice: 1440,
@@ -65,23 +55,13 @@ const pricingPlans: Plan[] = [
     id: 'ascension-tier',
     emoji: '☯️',
     name: 'Ascension Tier',
-    description: 'For visionaries ready to ascend Web5 with purpose.',
+    description: 'For visionaries and leaders',
     features: [
-      '📲 Mobile number for private updates',
-      '🤖 5 AI content articles a month',
-      '👻 Phantom Wallet Account (Web5 🏦)',
-      '🆔 Tokenized Bitcoin Identity',
-      '🪙 Custom stablecoin (CreatorCoin)',
-      '🌴 Link to CreatorCoin in Web5D LinkTree',
-      '💼 Tokenized purchase',
-      '🗺️ Purpose spotlight on the HAHZ.LIVE Map',
+      '📲 4 1-on-1 sessions per month',
       '💬 Private Ascension mastermind circle',
-      '📺 WEB5DTV access',
-      '🟠 Livestream show alerts via 📲',
-      '🧙🏽 Ask HAHZ — Spiritual Healthcare sessions',
-      '📚 LUMEE BOOTH AI Academy course grant',
-      '💖 4,444 tokens in $FOOD • $WATAA • $RNT • $LOVE',
-      '⚡️ 444 Bitcoin $RNT • L$VE • HAI$ • $CBO',
+      '🟠 Livestream show alerts',
+      '🧙🏽 Ask HAHZ unlimited sessions',
+      '💖 Exclusive content',
     ],
     monthlyPrice: 444,
     yearlyPrice: 4440,
@@ -112,9 +92,9 @@ export default function PricingRounded({ user, subscription }: Props) {
   return (
     <section className="container mx-auto" id="pricing">
       <div className="flex flex-col items-center justify-center w-full min-h-screen py-10">
-        <h1 className="text-3xl font-bold text-center">🌐 Web5 Subscription Tiers</h1>
+        <h1 className="text-3xl font-bold text-center">⚡️ Subscription Tiers</h1>
         <p className="mt-2 text-center text-muted-foreground max-w-md">
-          Choose a Web5 tier that aligns with your purpose and access exclusive tokenized rewards.
+          Tap in to exclusive content, mastermind groups, and personalized sessions designed to elevate your healing journey.
         </p>
 
         <div className="flex items-center justify-center mt-6 space-x-4">

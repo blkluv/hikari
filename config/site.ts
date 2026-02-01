@@ -7,7 +7,7 @@ export const siteConfig: SiteConfig = {
   url: 'https://hahz.live',
   ogImage: 'https://hahz.live/og.jpg',
   links: {
-    twitter: 'https://twitter.com/wizardofhahz',
+    twitter: 'https://t.me/hahznft',
     github: 'https://github.com/blkluv' // A
   }
 };

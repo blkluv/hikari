@@ -12,11 +12,13 @@ export default function FeaturesHover() {
     >
       <div className="mx-auto flex max-w-[58rem] flex-col items-center space-y-4 text-center">
         <h2 className="font-heading text-3xl leading-[1.1] sm:text-3xl md:text-6xl">
-          ORANGE.
+          Livestream Healing: The Fastest Path to Collective Awakening
         </h2>
         <p className="max-w-[85%] leading-normal text-muted-foreground sm:text-lg sm:leading-7">
-          ORANGE. — the live stage of hahz.live. Spiritual entertainment, PPV
-          livestreams, and tribe-powered moments where you earn to learn spiritual wealth.
+          Tap into the power of Livestream Healing—through 1-on-1 and group sessions—to heal yourself and the world.
+          True transformation happens when we align together, heart to heart, soul to soul. We are not healing alone;
+          we are healing as one, tapped into the same journey, guided by the same universal energy.
+          This is sacred space in motion. This is healing amplified through presence.
         </p>
       </div>
       <div className="mx-auto grid w-full gap-6 sm:grid-cols-2 md:grid-cols-3 md:max-w-[64rem]">

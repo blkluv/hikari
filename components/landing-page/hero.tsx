@@ -71,7 +71,7 @@ export default function HeroSection() {
                       `inline animate-gradient bg-gradient-to-r from-[#b76a24] via-[#6a24b7] to-[#b76a24] bg-[length:var(--bg-size)_100%] bg-clip-text text-transparent`,
                     )}
                   >
-                    Follow the progress on X
+                    Ask Hahz anything on Telegram
                   </span>
                   <ArrowRightIcon className="ml-2 size-4 transition-transform duration-300 ease-in-out group-hover:translate-x-0.5" />
                 </AnimatedGradientText>
@@ -80,32 +80,33 @@ export default function HeroSection() {
           )}
 
           <h1 className="text-2xl font-bold tracking-tight font-heading sm:text-4xl md:text-5xl lg:text-6xl">
-            📺 Think Netflix for your soul — live spiritual lessons, higher learning, and guidance from the 🧙🏽‍♂️ Wizard of Hahz
+            🧙🏽‍♂️ Live Spiritual Counseling to Heal X,Y,Z
 
           </h1>
 
           <div className="max-w-[42rem] font-bold tracking-tight text-primary sm:text-xl sm:leading-8 rounded-full p-2">
-            A premium livestream network of spiritual lessons, mastermind energy,
-            and a private tribe where you earn to learn spiritual wealth. Join
-            live sessions, connect with like-minded souls, and level up your life.
+            👁️ Tired of feeling lost, stuck, or disconnected like I was prior to
+            healing myself? Find clarity, peace, and purpose through guided
+            spiritual counseling—live sessions with the Wizard of Hahz designed
+            to heal your mind, heart, and spirit.
           </div>
 
           <div className="flex flex-wrap justify-center gap-4">
             <Link
-              href="https://linketr.ee/web5d"
+              href="https://instagram.com/healxyz"
               className={cn(buttonVariants({ size: 'xl' }), 'rounded-full border-2 border-primary dark:border-white text-bold text-white')}
             >
-              WEB5D LINKTREE
+              HealXYZ Instagram
             </Link>
 
             {siteConfig.links.github && (
               <Link
-                href="https://orange.hahz.live"
+                href="https://tiktok.com/@healxyz"
                 target="_blank"
                 rel="noreferrer"
                 className={cn(buttonVariants({ variant: 'outline', size: 'xl' }), 'rounded-full border-2 border-primary dark:border-white text-semibold')}
               >
-                LIVE
+                HealXYZ TikTok
               </Link>
             )}
           </div>
@@ -118,7 +119,7 @@ export default function HeroSection() {
                   <Star key={i} className="text-yellow-300 fill-yellow-200 size-5" />
                 ))}
               </div>
-              <span className="text-xs font-semibold">Join 160+ United</span>
+              <span className="text-xs font-semibold">Join 160+ Healed</span>
             </div>
           </div>
         </div>

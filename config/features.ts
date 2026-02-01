@@ -1,37 +1,37 @@
 export const features = [
   {
     emoji: 'https://twemoji.maxcdn.com/v/latest/svg/1f3a5.svg', // 🎥
-    title: 'Live Building Session',
+    title: 'Livestream',
     description:
-      'Ask questions, get answers, and participate in livestreams hosted by Hahz, bringing motivation, tech, and spiritual guidance in real-time.',
-    link: './',
+      'Orange is the HAHZ.LIVE livestream platform for healing show sessions that all subscribers receive alerts and access to.',
+    link: 'https://orange.hahz.live',
   },
   {
     emoji: 'https://twemoji.maxcdn.com/v/latest/svg/1f465.svg', // 👥
     title: 'Tribe',
     description:
-      'Join a manifested mastermind network of leaders and visionaries, connect, collaborate, and grow with like-minded members.',
+      'All subscribers gain access to our private Telegram channel where they can ask questions and connect with like-minded manifestors.',
     link: './',
   },
   {
-    emoji: 'https://twemoji.maxcdn.com/v/latest/svg/1f3c6.svg', // 🏆
-    title: 'Challenges',
+    emoji: 'https://twemoji.maxcdn.com/v/latest/svg/1f4ad.svg', // 💭
+    title: 'Questions',
     description:
-      'Participate in manifested 7/21/30-day programs, structured to help you take action, stay accountable, and build lasting habits.',
+      'Questions lead to 1-on-1 or group livestream shows depending on the volume of similar inquiries from our tribe.',
     link: './',
   },
   {
     emoji: 'https://twemoji.maxcdn.com/v/latest/svg/1f4b0.svg', // 💰
-    title: 'Earn to Learn',
+    title: 'Currency',
     description:
-      'We made learning fun and rewarding by earning crypto airdrops at the end of the session about NFTs, memecoins and stablecoins.',
+      'Learn how to manifest spiritual wealth and abundance in the spiritual-purpose economy.',
     link: './',
   },
   {
     emoji: 'https://twemoji.maxcdn.com/v/latest/svg/1f48e.svg', // 💎
-    title: 'VIP',
+    title: 'Gems',
     description:
-      'Experience exclusive Q&As and small-group sessions, including 1:1 spotlight opportunities with the Wizard of Hahz to learn how to manifest your dreams.',
+      'Receive exclusive spiritual content, resources, and perks as a subscriber to enhance your manifestation journey.',
     link: './',
   },
   {

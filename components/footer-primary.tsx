@@ -73,13 +73,11 @@ export default function FooterPrimary() {
 
           {/* Web5 Socials */}
           <div>
-            <h3 className="mb-4 text-lg font-bold">WEB5 SOCIALZ</h3>
+            <h3 className="mb-4 text-lg font-bold">SOCIALZ</h3>
             <ul className="space-y-2">
-              <li><AnimatedUnderline href="https://app.lumeebooth.com" className="text-primary">LUMEE BOOTH →</AnimatedUnderline></li>
-              <li><AnimatedUnderline href="https://app.luvnft.com" className="text-primary">LUV NFT →</AnimatedUnderline></li>
-              <li><AnimatedUnderline href="https://app.healxyz.com" className="text-primary">HEALXYZ →</AnimatedUnderline></li>
-              <li><AnimatedUnderline href="https://rnt.social" className="text-primary">RNT.SOCIAL →</AnimatedUnderline></li>
-              <li><AnimatedUnderline href="https://smilesats.com" className="text-primary">SMILESATS →</AnimatedUnderline></li>
+              <li><AnimatedUnderline href="https://instagram.com/healxyz" className="text-primary">HEALXYZ INSTAGRAM →</AnimatedUnderline></li>
+              <li><AnimatedUnderline href="https://tiktok.com/@healxyz" className="text-primary">HEALXYZ TIKTOK →</AnimatedUnderline></li>
+              <li><AnimatedUnderline href="https://discord.gg/EunEt7Q68h" className="text-primary">HEALXYZ DISCORD →</AnimatedUnderline></li>
             </ul>
           </div>
 
@@ -87,7 +85,7 @@ export default function FooterPrimary() {
           <div>
             <h3 className="mb-4 text-lg font-bold">HAHZ.LIVE</h3>
             <ul className="space-y-2">
-              <li><AnimatedUnderline href="https://orange.hahz.live" className="text-primary">ORANGE. - LIVE →</AnimatedUnderline></li>
+              <li><AnimatedUnderline href="https://orange.hahz.live" className="text-primary">ORANGE. - LIVESTREAM →</AnimatedUnderline></li>
               <li><AnimatedUnderline href="https://billing.stripe.com/p/login/eVaaH68crfwxf3WbII" className="text-primary">BILLING →</AnimatedUnderline></li>
               <li><AnimatedUnderline href="/blog" className="text-primary">BLOG →</AnimatedUnderline></li>
               <li><AnimatedUnderline href="mailto:hahz5d@pm.me" className="text-primary">EMAIL →</AnimatedUnderline></li>
@@ -96,9 +94,8 @@ export default function FooterPrimary() {
 
           {/* Connect */}
           <div>
-            <h3 className="mb-4 text-lg font-bold">TAP IN</h3>
+            <h3 className="mb-4 text-lg font-bold">ASK HAHZ</h3>
             <ul className="space-y-2">
-              <li><AnimatedUnderline href="https://x.com/wizardofhahz" className="text-primary">X →</AnimatedUnderline></li>
               <li><AnimatedUnderline href="https://linkedin.com/in/hahzterry" className="text-primary">LINKEDIN →</AnimatedUnderline></li>
               <li><AnimatedUnderline href="https://t.me/hahznft" className="text-primary">TELEGRAM →</AnimatedUnderline></li>
             </ul>
@@ -110,7 +107,7 @@ export default function FooterPrimary() {
             <LogInIcon className="w-6 h-6" />
             <span className="text-xl font-bold">HAHZ.LIVE</span>
           </div>
-          <p className="mt-4 text-gray-500 md:mt-0">© HAHZ.LIVE Inc. 2025</p>
+          <p className="mt-4 text-gray-500 md:mt-0">© HAHZ.LIVE 2026</p>
         </div>
       </div>
     </footer>
