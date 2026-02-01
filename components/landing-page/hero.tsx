@@ -93,7 +93,11 @@ export default function HeroSection() {
 
           <div className="flex flex-wrap justify-center gap-4">
             <Link
+<<<<<<< HEAD
               href="https://instagram.com/healxyz"
+=======
+              href="https://linktr.ee/web5d"
+>>>>>>> 968e3c37c19cb7d5316480e31f26eb50c08a000b
               className={cn(buttonVariants({ size: 'xl' }), 'rounded-full border-2 border-primary dark:border-white text-bold text-white')}
             >
               HealXYZ Instagram
