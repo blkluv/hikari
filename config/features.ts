@@ -3,8 +3,8 @@ export const features = [
     emoji: 'https://twemoji.maxcdn.com/v/latest/svg/1f3a5.svg', // 🎥
     title: 'Livestream',
     description:
-      'Orange is the HAHZ.LIVE livestream platform for healing show sessions that all subscribers receive alerts and access to.',
-    link: 'https://orange.hahz.live',
+      'Orange is the HEALXYZ livestream platform for healing show sessions that all subscribers receive alerts and access to.',
+    link: 'https://orange.healxyz.com',
   },
   {
     emoji: 'https://twemoji.maxcdn.com/v/latest/svg/1f465.svg', // 👥

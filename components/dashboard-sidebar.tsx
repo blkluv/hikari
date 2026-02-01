@@ -32,7 +32,7 @@ const Sidebar = ({ navConfig }: { navConfig: NavItem[] }) => {
           prefetch={false}
         >
           <Eclipse className="w-5 h-5 transition-all group-hover:scale-110" />
-          <span className="sr-only">HAHZ.LIVE Inc</span>
+          <span className="sr-only">HEALXYZ Inc</span>
         </Link>
         {navConfig.map((item, index) => {
           const IconComponent =

@@ -18,11 +18,11 @@ export default function Footer() {
             {footerLinks.getInTouch.title}
           </h2>
           <p className="mb-4 text-xl text-gray-300">
-            We partner with global brands, from startups to industry leaders.{' '}
+            We partner with anyone who needs to Heal XYZ{' '}
             <span className="font-bold text-white">Let's discuss.</span>
           </p>
           <h3 className="mb-2 text-sm font-bold text-gray-300">
-            Subscribe to our Newsletter
+            Subscribe
           </h3>
           <form className="flex">
             <Input
@@ -102,7 +102,7 @@ export default function Footer() {
       <div className="mt-8 text-xs text-center text-gray-300">
         <p>
           Copyright ©2025{' '}
-          <span className="font-bold text-white">HAHZ.LIVE</span>. All rights
+          <span className="font-bold text-white">HEALXYZ</span>. All rights
           reserved.
         </p>
       </div>

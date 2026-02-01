@@ -44,7 +44,7 @@ export default function Page(): React.ReactElement {
           }}
         >
           <h1 className="pb-2 mb-4 text-4xl font-bold border-b-4 border-foreground md:text-5xl">
-            HAHZ.LIVE BLOG
+            HEALXYZ BLOG
           </h1>
           <p className="text-sm md:text-base">
             Learn how to manifest your higher purpose.

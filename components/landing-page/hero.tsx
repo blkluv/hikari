@@ -24,9 +24,9 @@ export default function HeroSection() {
   ];
 
   const quotes = [
-    { text: "Hahz.live totally changed how I approach my daily grind—love the vibes and the tribe!", author: "LunaMystic", title: "Spiritual Creator & Crypto Enthusiast", avatarFallback: "DC", avatarImg: "/images/dcodes.png" },
-    { text: "Daily huddles + memecoin rewards? Unreal. My productivity has skyrocketed!", author: "CryptoZen", title: "DeFi Strategist & Mindfulness Coach", avatarFallback: "SK", avatarImg: "/images/SuhailKakar.jpg" },
-    { text: "The 1-on-1 coaching sessions are next level. Wizard of HAHZ is my new spiritual mentor.", author: "AuroraLight", title: "Spiritual Guide & NFT Collector", avatarFallback: "SA", avatarImg: "/images/said.jpg" },
+    { text: "HEALXYZ totally changed how I approach my daily grind—love the vibes and the tribe!", author: "LunaMystic", title: "Spiritual Creator", avatarFallback: "DC", avatarImg: "/images/dcodes.png" },
+    { text: "I've been following HEALXYZ on Instagram for years now!", author: "SoZen", title: "Mindfulness Coach", avatarFallback: "SK", avatarImg: "/images/SuhailKakar.jpg" },
+    { text: "The 1-on-1 coaching sessions are next level. Wizard of HEALXYZ is my new spiritual mentor.", author: "AuroraLight", title: "Spiritual Guide", avatarFallback: "SA", avatarImg: "/images/said.jpg" },
   ];
 
   const [currentQuote, setCurrentQuote] = useState(0);
@@ -93,11 +93,7 @@ export default function HeroSection() {
 
           <div className="flex flex-wrap justify-center gap-4">
             <Link
-<<<<<<< HEAD
               href="https://instagram.com/healxyz"
-=======
-              href="https://linktr.ee/web5d"
->>>>>>> 968e3c37c19cb7d5316480e31f26eb50c08a000b
               className={cn(buttonVariants({ size: 'xl' }), 'rounded-full border-2 border-primary dark:border-white text-bold text-white')}
             >
               HealXYZ Instagram

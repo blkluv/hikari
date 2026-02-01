@@ -29,7 +29,7 @@ export default function CircularNavigation({
         <div className="p-1 rounded-full bg-slate-50 dark:bg-slate-900">
           <SunIcon className="transition-transform duration-300 ease-in-out size-8 hover:scale-110" />
         </div>
-        <span className="text-lg font-extrabold md:text-xl tracking-tightest">HAHZ.LIVE</span>
+        <span className="text-lg font-extrabold md:text-xl tracking-tightest">HEALXYZ</span>
       </div>
       {items?.length ? (
         <div className="hidden space-x-6 md:flex">

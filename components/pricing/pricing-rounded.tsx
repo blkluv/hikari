@@ -27,7 +27,7 @@ const pricingPlans: Plan[] = [
     id: 'tribe-tier',
     emoji: '💟',
     name: 'Tribe Tier',
-    description: 'Your intro to the Web5 family. ✨ Connect, learn, and earn with purpose.',
+    description: 'Your 5D Tribe.',
     features: [
       '💬 Private Tribe mastermind chat invite',
       '🟠 Livestream show alerts',
@@ -40,7 +40,7 @@ const pricingPlans: Plan[] = [
     id: 'manifestor-tier',
     emoji: '☮️',
     name: 'Manifestor Tier',
-    description: 'For manifestors',
+    description: 'For manifestors in training.',
     features: [
       '📲 Two 1-on-1 sessions per month',
       '💬 Private Manifestor mastermind group',

@@ -14,7 +14,7 @@ export default function Layout({ children }: { children: ReactNode }) {
         title: (
           <>
             <SunIcon className="transition-transform duration-300 ease-in-out size-8 hover:scale-110" />
-            <strong>HAHZ.LIVE</strong>
+            <strong>HEALXYZ</strong>
           </>
         ),
         url: '/'

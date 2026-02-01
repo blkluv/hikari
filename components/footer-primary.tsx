@@ -82,9 +82,9 @@ export default function FooterPrimary() {
 
           {/* Company */}
           <div>
-            <h3 className="mb-4 text-lg font-bold">HAHZ.LIVE</h3>
+            <h3 className="mb-4 text-lg font-bold">HEALXYZ</h3>
             <ul className="space-y-2">
-              <li><AnimatedUnderline href="https://orange.hahz.live" className="text-primary">ORANGE. - LIVESTREAM →</AnimatedUnderline></li>
+              <li><AnimatedUnderline href="https://orange.healxyz.com" className="text-primary">ORANGE. - LIVESTREAM →</AnimatedUnderline></li>
               <li><AnimatedUnderline href="https://billing.stripe.com/p/login/eVaaH68crfwxf3WbII" className="text-primary">BILLING →</AnimatedUnderline></li>
               <li><AnimatedUnderline href="/blog" className="text-primary">BLOG →</AnimatedUnderline></li>
               <li><AnimatedUnderline href="mailto:hahz5d@pm.me" className="text-primary">EMAIL →</AnimatedUnderline></li>
@@ -120,9 +120,9 @@ export default function FooterPrimary() {
         <div className="flex flex-col items-center justify-between pt-6 mt-10 border-t md:flex-row">
           <div className="flex items-center space-x-2">
             <LogInIcon className="w-6 h-6" />
-            <span className="text-xl font-bold">HAHZ.LIVE</span>
+            <span className="text-xl font-bold">HEALXYZ</span>
           </div>
-          <p className="mt-4 text-gray-500 md:mt-0">© HAHZ.LIVE 2026</p>
+          <p className="mt-4 text-gray-500 md:mt-0">© HEALXYZ 2026</p>
         </div>
       </div>
     </footer>

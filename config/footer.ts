@@ -2,7 +2,7 @@ export const footerLinks = {
   getInTouch: {
     title: 'Get in touch',
     description:
-      "HAHZ.LIVE partners with visionaries to global brands, from startups to industry leaders. Let's discuss.",
+      "HEALXYZ partners with visionaries to global brands, from startups to industry leaders. Let's discuss.",
     subscribeTitle: 'Subscribe to our newsletter'
   },
   pages: {

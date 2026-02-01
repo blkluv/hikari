@@ -24,7 +24,7 @@ export function MobileNav({ items, children, user }: MobileNavProps) {
       <div className="relative z-20 grid gap-6 p-4 rounded-md shadow-md bg-popover text-popover-foreground">
         <Link href="/" className="flex items-center space-x-2">
           <Icons.Eclipse />
-          <span className="font-bold">HAHZ.LIVE</span>
+          <span className="font-bold">HEALXYZ</span>
         </Link>
         <nav className="flex grid items-center grid-flow-row text-sm text-center auto-rows-max">
           {items.map((item, index) => (

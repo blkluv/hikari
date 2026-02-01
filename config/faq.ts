@@ -14,7 +14,7 @@ export const faqItems = [
   {
     question: 'Where is the livestream events hosted?',
     answer:
-      'HAHZ.LIVE has a subdomain called ORANGE.HAHZ.LIVE where all livestream events are hosted. You will receive Telegram alerts and email notifications for upcoming livestream events once you subscribe.'
+      'HEALXYZ has a subdomain called ORANGE.HEALXYZ where all livestream events are hosted. You will receive Telegram alerts and email notifications for upcoming livestream events once you subscribe.'
   },
   {
      question: 'What are the livestream topics?',

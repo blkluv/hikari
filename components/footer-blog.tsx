@@ -10,14 +10,14 @@ export default function FooterBlog() {
         <div className="flex flex-col items-center justify-between md:flex-row">
           <div className="flex items-center space-x-2">
             <Icons.Eclipse className="w-6 h-6" />
-            <span className="text-xl font-bold">HAHZ.LIVE</span>
+            <span className="text-xl font-bold">HEALXYZ</span>
           </div>
           <div className="flex flex-col items-center space-y-2 md:items-end md:space-y-0">
             <div className="flex items-center space-x-4">
               <p className="text-sm text-muted-foreground">
                 Built with ❤️ by{' '}
                 <a
-                  href="https://x.com/wizardofhahz"
+                  href="https://linkedin.com/in/wizardofhahz/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="underline"
@@ -26,7 +26,7 @@ export default function FooterBlog() {
                 </a>
               </p>
               <a
-                href="https://x.com/wizardofhahz"
+                href="https://linkedin.com/in/wizardofhahz/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-muted-foreground hover:text-primary"
