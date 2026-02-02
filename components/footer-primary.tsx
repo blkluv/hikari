@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState, FormEvent } from 'react'
+import React, { useState, FormEvent, useEffect } from 'react'
 import Link from 'next/link'
 import { createClient } from '@supabase/supabase-js'
 import { Button } from '@/components/ui/button'
@@ -45,6 +45,18 @@ export default function FooterPrimary() {
   const [email, setEmail] = useState('')
   const { toast } = useToast()
 
+  // Load TikTok embed script
+  useEffect(() => {
+    const script = document.createElement('script')
+    script.src = 'https://www.tiktok.com/embed.js'
+    script.async = true
+    document.body.appendChild(script)
+
+    return () => {
+      document.body.removeChild(script)
+    }
+  }, [])
+
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     try {
@@ -53,7 +65,7 @@ export default function FooterPrimary() {
 
       toast({
         title: 'Subscribed! 🎉',
-        description: 'Thank you for subscribing! You’ll get an email when the next live session airs.',
+        description: 'Thank you for subscribing! You\'ll get an email when the next live session airs.',
       })
       setEmail('')
     } catch (err) {
@@ -101,19 +113,26 @@ export default function FooterPrimary() {
             </ul>
           </div>
 
-          {/* Subscribe */}
+          {/* TikTok Embed (replacing Subscribe section) */}
           <div>
-            <h3 className="mb-4 text-lg font-bold">STAY IN THE LOOP</h3>
-            <form onSubmit={handleSubmit} className="flex flex-col gap-2">
-              <Input
-                type="email"
-                placeholder="Enter your email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-              />
-              <Button type="submit" className="w-full">Subscribe</Button>
-            </form>
+            <h3 className="mb-4 text-lg font-bold">LATEST ON TIKTOK</h3>
+            <blockquote 
+              className="tiktok-embed" 
+              cite="https://www.tiktok.com/@healxyz" 
+              data-unique-id="healxyz" 
+              data-embed-type="creator" 
+              style={{ maxWidth: '780px', minWidth: '288px' }}
+            >
+              <section>
+                <a 
+                  target="_blank" 
+                  href="https://www.tiktok.com/@healxyz?refer=creator_embed"
+                  rel="noopener noreferrer"
+                >
+                  @healxyz
+                </a>
+              </section>
+            </blockquote>
           </div>
         </div>
 
